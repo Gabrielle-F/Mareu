@@ -1,6 +1,8 @@
 package gabrielle.freville.mareu1;
 
-public class Meetings {
+import java.io.Serializable;
+
+public class Meetings implements Serializable{
 
     private String mOrder;
     private String mHour;

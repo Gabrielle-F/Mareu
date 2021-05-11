@@ -2,11 +2,11 @@ package gabrielle.freville.mareu1;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
 
 import controller.ApiService;
 import controller.DependencyInjection;
@@ -16,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
     FloatingActionButton mFabAddMeeting;
     private ApiService mApiService;
     private View.OnClickListener mOnClick;
+    private Meetings mMeetings;
 
     enum mRooms{
         Mario, Peach, Luigi, Wario, Toad, Yoshi, Luma, Melody, Bowser, Daisy
@@ -41,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
         mOnClick = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                  addMeetings(mMeetings);
             }
         };
         mFabAddMeeting.setOnClickListener(mOnClick);
@@ -86,6 +87,12 @@ public class MainActivity extends AppCompatActivity {
             getDrawable(R.drawable.item_luma_sticker);
             System.out.println("Luma");
         }
+    }
+
+    private void addMeetings(Meetings meetings){
+        Intent intent = new Intent(this, AddMeetingsActivity.class);
+        intent.putExtra("Meeting", meetings);
+        startActivity(intent);
     }
 
 }

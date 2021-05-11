@@ -3,4 +3,17 @@
     <color name="colorPrimary">#6200EE</color>
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
+
+    <!-- Meetings Stickers -->
+    <color name="brightred">#FF1E14</color>
+    <color name="lightred">#FF5050</color>
+    <color name="lightorange">#FF9933</color>
+    <color name="lightyellow">#FFFF66</color>
+    <color name="brightgreen">#00FF99</color>
+    <color name="lightgreen">#66FFCC</color>
+    <color name="lightblue">#66CCFF</color>
+    <color name="lightpurple">#9966FF</color>
+    <color name="lightpink">#FF6699</color>
+    <color name="luma">#C7CF7B</color>
+
 </resources>

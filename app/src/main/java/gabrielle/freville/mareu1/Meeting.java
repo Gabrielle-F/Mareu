@@ -2,28 +2,28 @@ package gabrielle.freville.mareu1;
 
 import java.io.Serializable;
 
-public class Meetings implements Serializable{
+public class Meeting implements Serializable{
 
-    private String mOrder;
     private String mHour;
-    private String mRoom;
+    private String mDate;
+    private Room mRoom;
     private String mParticipants;
 
-    public Meetings(String order, String hour, String room, String participants) {
-        this.mOrder=order;
+    public Meeting(String date, String hour, Room room, String participants) {
+        this.mDate=date;
         this.mHour=hour;
         this.mRoom=room;
         this.mParticipants=participants;
     }
 
-    public String getOrder() { return mOrder; }
-    public void setOrder(String order) { this.mOrder=order; }
+    public String getDate() { return mDate; }
+    public void setDate(String date) { this.mDate=date; }
 
     public String getHour() { return mHour; }
     public void setHour(String hour) { this.mHour=hour; }
 
-    public String getRoom() { return mRoom; }
-    public void setRoom(String room) { this.mRoom=room; }
+    public Room getRoom() { return mRoom; }
+    public void setRoom(Room room) { this.mRoom=room; }
 
     public String getParticipants() { return mParticipants; }
     public void setParticipants(String participants) { this.mParticipants=participants; }

@@ -1,3 +1,29 @@
 <resources>
     <string name="app_name">Mareu1</string>
+
+    <!--Main Activity-->
+    <string name="toolbar_title">Mareu</string>
+
+    <!--Add Meeting Activity-->
+    <string name="add_meeting_title">Programmer une réunion</string>
+    <string name="select_room">Sélectionnez une salle:</string>
+    <string name="select_date">Sélectionnez une date:</string>
+    <string name="select_hour">Sélectionnez une heure:</string>
+    <string name="select_participants">Entrez le mail des participants</string>
+    <string name="validate">Confirmer</string>
+    <string name="cancel">Annuler</string>
+
+    <!--Strain Meetings-->
+    <string name="strain_meetings">Filtrer</string>
+    <string name="strain_meetings_date">Prévues le:</string>
+    <string name="strain_meetings_room">Salle:</string>
+    <string name="confirm_strain_button">Confirmer</string>
+    <string name="cancel_strain_button">Annuler</string>
+
+    <!--Item-->
+    <string name="meeting_sticker">Sticker</string>
+    <string name="meeting_title">%1$s - %2$s</string>
+
+    <!--Menu-->
+    <string name="strain_meetings_action">StrainMeetings</string>
 </resources>

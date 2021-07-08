@@ -1,33 +1,36 @@
 package controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import gabrielle.freville.mareu1.Meetings;
+import gabrielle.freville.mareu1.Meeting;
 import gabrielle.freville.mareu1.MeetingsGenerator;
+import gabrielle.freville.mareu1.Room;
 import gabrielle.freville.mareu1.StrainMeetingsDialogFragment;
 
 public class MeetingsApiService implements ApiService {
 
-    private List<Meetings> mMeetings = MeetingsGenerator.DUMMY_MEETINGS;
+    private ArrayList<Meeting> mMeetings = new ArrayList<>(MeetingsGenerator.DUMMY_MEETINGS);
     private StrainMeetingsDialogFragment mStrainMeetings = new StrainMeetingsDialogFragment();
 
     @Override
-    public void createMeeting(Meetings meetings) {
-            mMeetings.add(meetings);
+    public void createMeeting(Meeting meeting) {
+            mMeetings.add(meeting);
     }
 
     @Override
-    public List<Meetings> getMeetings() {
+    public List<Meeting> getMeetings() {
         return mMeetings;
     }
 
     @Override
-    public StrainMeetingsDialogFragment getStrainMeetings() {
+    public StrainMeetingsDialogFragment getStrainMeetings(int requestCode, int resultCode) {
         return mStrainMeetings;
     }
 
     @Override
-    public void deleteMeeting(Meetings meetings) {
-        mMeetings.remove(meetings);
+    public void deleteMeeting(Meeting meeting) {
+        mMeetings.remove(meeting);
     }
+
 }

@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -38,9 +40,9 @@ public class StrainMeetingsDialogFragment extends DialogFragment {
     public Bundle mBundle;
     final Calendar calendar = Calendar.getInstance();
 
-    //TODO compléter bundle avec la salle une fois problème de type résolu
-    public static StrainMeetingsDialogFragment newInstance(String pDate) {
+    public static StrainMeetingsDialogFragment newInstance(Room pRoom, String pDate) {
         Bundle mBundle = new Bundle();
+        mBundle.putSerializable("Room", pRoom);
         mBundle.putString("Date", pDate);
 
         StrainMeetingsDialogFragment fragment = new StrainMeetingsDialogFragment();
@@ -81,6 +83,7 @@ public class StrainMeetingsDialogFragment extends DialogFragment {
             @Override
             public void onClick(View v) {
                 getFilter();
+                dismiss();
             }
         });
 
@@ -108,22 +111,14 @@ public class StrainMeetingsDialogFragment extends DialogFragment {
         });
     }
 
-    //TODO compléter le listener avec la salle une fois problème de type résolu
-    public interface ConfirmFilterListener{
-        void confirmFilter(String pDate);
-    }
-
-    //TODO compléter le filtre avec la salle une fois problème de type résolu
-    public void getFilter(){
-        final ConfirmFilterListener vOnConfirmFilterListener = this.mOnConfirmFilterListener;
-         mValidate.setOnClickListener(new View.OnClickListener() {
-             @Override
-             public void onClick(View v) {
-                 final String vDateFilter = mEditTextDate.getEditableText().toString();
-                 vOnConfirmFilterListener.confirmFilter(vDateFilter);
-                 dismiss();
-             }
-         });
+    @Override
+    public void onResume() {
+        super.onResume();
+        Window window = getDialog().getWindow();
+        WindowManager.LayoutParams params = window.getAttributes();
+        params.width = 930;
+        params.height = 1100;
+        window.setAttributes(params);
     }
 
     public void initDatePicker(){
@@ -145,6 +140,22 @@ public class StrainMeetingsDialogFragment extends DialogFragment {
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy", Locale.FRANCE);
         String date = formatter.format(calendar.getTime());
         mEditTextDate.setText(date);
+    }
+
+    public Room getRoom(){
+        Room pRoom = (Room) mRoom.getSelectedItem();
+        return pRoom;
+    }
+
+    public interface ConfirmFilterListener{
+        void confirmFilter(Room pRoom, String pDate);
+    }
+
+    public void getFilter(){
+        final ConfirmFilterListener vOnConfirmFilterListener = this.mOnConfirmFilterListener;
+        final Room vRoomFilter = getRoom();
+        final String vDateFilter = mEditTextDate.getEditableText().toString();
+        vOnConfirmFilterListener.confirmFilter(vRoomFilter, vDateFilter);
     }
 
     @Override

@@ -1,11 +1,9 @@
 package controller;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import gabrielle.freville.mareu1.Meeting;
 import gabrielle.freville.mareu1.MeetingsGenerator;
-import gabrielle.freville.mareu1.Room;
 import gabrielle.freville.mareu1.StrainMeetingsDialogFragment;
 
 public class MeetingsApiService implements ApiService {
@@ -19,7 +17,7 @@ public class MeetingsApiService implements ApiService {
     }
 
     @Override
-    public List<Meeting> getMeetings() {
+    public ArrayList<Meeting> getMeetings() {
         return mMeetings;
     }
 

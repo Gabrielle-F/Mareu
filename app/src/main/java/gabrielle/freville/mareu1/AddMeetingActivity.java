@@ -59,6 +59,7 @@ public class AddMeetingActivity extends AppCompatActivity {
         initDatePicker();
         initTimePicker();
         initSpinner();
+        initListeners();
     }
 
     private void initListeners(){
@@ -93,7 +94,7 @@ public class AddMeetingActivity extends AppCompatActivity {
                 setStringTime();
             }
         };
-        mTimePickerDialog = new TimePickerDialog(this, android.R.style.Theme_Holo_Light_Dialog_NoActionBar,
+        mTimePickerDialog = new TimePickerDialog(this, android.R.style.Theme_Material_Dialog,
                 timeSetListener, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), true);
     }
 
@@ -108,7 +109,7 @@ public class AddMeetingActivity extends AppCompatActivity {
                 setStringDate();
             }
         };
-        mDatePickerDialog = new DatePickerDialog(this, android.R.style.Theme_Holo_Light_Dialog_NoActionBar,
+        mDatePickerDialog = new DatePickerDialog(this, android.R.style.Theme_Material_Dialog,
                 dateSetListener, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
     }
 

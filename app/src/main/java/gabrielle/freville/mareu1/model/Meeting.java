@@ -6,8 +6,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-import gabrielle.freville.mareu1.Room;
-
 public class Meeting implements Serializable, Comparable<Meeting> {
 
     private String mHour;

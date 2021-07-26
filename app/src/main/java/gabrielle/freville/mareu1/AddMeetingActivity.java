@@ -24,7 +24,7 @@ import java.util.Locale;
 import controller.DependencyInjection;
 import controller.MeetingsApiService;
 
-public class AddMeetingsActivity extends AppCompatActivity {
+public class AddMeetingActivity extends AppCompatActivity {
 
     public EditText editTextDate;
     public EditText editTextTime;
@@ -43,7 +43,6 @@ public class AddMeetingsActivity extends AppCompatActivity {
     public DatePickerDialog mDatePickerDialog;
     public TimePickerDialog mTimePickerDialog;
     final Calendar calendar = Calendar.getInstance();
-    public int position;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -74,7 +73,7 @@ public class AddMeetingsActivity extends AppCompatActivity {
         mCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AddMeetingsActivity.this.finish();
+                AddMeetingActivity.this.finish();
             }
         });
 
@@ -130,7 +129,7 @@ public class AddMeetingsActivity extends AppCompatActivity {
                 timeSetListener, selectedHour, selectedMinute, is24H);
     }
 
-    //** Attribuer le temps à l'EditText et la convertir en texte */
+    //** Attribuer l'heure à l'EditText et la convertir en texte */
     public void setStringTime(){
         calendar.set(selectedHour, selectedMinute);
         SimpleDateFormat formatter = new SimpleDateFormat("HH:mm", Locale.FRANCE);

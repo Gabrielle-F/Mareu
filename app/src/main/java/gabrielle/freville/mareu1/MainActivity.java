@@ -10,9 +10,10 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import java.util.ArrayList;
 
 import controller.ApiService;
 import controller.DependencyInjection;
@@ -23,6 +24,7 @@ public class MainActivity extends AppCompatActivity implements StrainMeetingsDia
     private ApiService mApiService;
     private String mDate;
     private Room mRoom;
+    private ArrayList<Meeting> mMeetings;
 
     public RecyclerView mRecyclerView;
     public MeetingRecyclerViewAdapter mAdapter;
@@ -36,12 +38,9 @@ public class MainActivity extends AppCompatActivity implements StrainMeetingsDia
         mFabAddMeeting = findViewById(R.id.button_add_meeting);
         initList();
 
-        mFabAddMeeting.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, AddMeetingsActivity.class);
-                startActivity(intent);
-            }
+        mFabAddMeeting.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, AddMeetingActivity.class);
+            startActivity(intent);
         });
     }
 
@@ -57,51 +56,44 @@ public class MainActivity extends AppCompatActivity implements StrainMeetingsDia
         switch (item.getItemId()) {
             case R.id.strain_action:
                 showStrainMeetingsDialog();
+                confirmFilter(mRoom, mDate);
             return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
+    //** Initialiser la liste des réunions */
     public void initList(){
-        mAdapter = new MeetingRecyclerViewAdapter(mApiService.getMeetings());
+        mMeetings = mApiService.getMeetings();
+        mAdapter = new MeetingRecyclerViewAdapter(mMeetings);
         mRecyclerView.setAdapter(mAdapter);
+    }
+
+    //** Mettre la liste à jour */
+    private void updateList(){
+        mMeetings.clear();
+        mMeetings.addAll(mApiService.getMeetings());
+        mAdapter.notifyDataSetChanged();
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        initList();
+        updateList();
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        initList();
-    }
-
-    //TODO compléter les paramètres du newInstance avec la salle une fois problème de type résolu
     //** Show Pop Up for strain meetings */
     private void showStrainMeetingsDialog(){
         FragmentManager fragmentManager = getSupportFragmentManager();
-        StrainMeetingsDialogFragment strainMeetingsDialogFragment = StrainMeetingsDialogFragment.newInstance(mDate);
+        StrainMeetingsDialogFragment strainMeetingsDialogFragment = StrainMeetingsDialogFragment.newInstance(mRoom, mDate);
         strainMeetingsDialogFragment.showNow(fragmentManager, "strain_meeting_dialog");
     }
 
-    //TODO compléter le listener avec la salle
     //** Get Strain Meetings */
     @Override
-    public void confirmFilter(String pDate) {
+    public void confirmFilter(Room pRoom, String pDate) {
+        mRoom = pRoom;
         mDate = pDate;
-        initList();
-    }
-
-    private void deleteMeeting(Meeting meeting){
-        mApiService.deleteMeeting(meeting);
-        initList();
-    }
-
-    private void addMeeting(Meeting meeting){
-        mApiService.createMeeting(meeting);
-        initList();
+        updateList();
     }
 }

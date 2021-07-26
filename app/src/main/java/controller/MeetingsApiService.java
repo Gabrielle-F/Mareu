@@ -1,15 +1,21 @@
 package controller;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import gabrielle.freville.mareu1.Meeting;
-import gabrielle.freville.mareu1.MeetingsGenerator;
+import gabrielle.freville.mareu1.MeetingGenerator;
 import gabrielle.freville.mareu1.StrainMeetingsDialogFragment;
 
 public class MeetingsApiService implements ApiService {
 
-    private ArrayList<Meeting> mMeetings = new ArrayList<>(MeetingsGenerator.DUMMY_MEETINGS);
-    private StrainMeetingsDialogFragment mStrainMeetings = new StrainMeetingsDialogFragment();
+    private List<Meeting> mMeetings;
+    private StrainMeetingsDialogFragment mStrainMeetings;
+
+    public MeetingsApiService(){
+        mMeetings = new ArrayList<>(MeetingGenerator.DUMMY_MEETINGS);
+        mStrainMeetings = new StrainMeetingsDialogFragment();
+    }
 
     @Override
     public void createMeeting(Meeting meeting) {
@@ -18,7 +24,7 @@ public class MeetingsApiService implements ApiService {
 
     @Override
     public ArrayList<Meeting> getMeetings() {
-        return mMeetings;
+        return new ArrayList<>(mMeetings);
     }
 
     @Override

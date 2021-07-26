@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class MeetingsGenerator {
+public class MeetingGenerator {
 
     public static List<Meeting> DUMMY_MEETINGS = Arrays.asList(
             new Meeting("25/06/21", "14h00", Room.PEACH, "maxime@lamzone.com, alex@lamzone.com"),

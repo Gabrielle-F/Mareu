@@ -1,9 +1,11 @@
-package gabrielle.freville.mareu1;
+package gabrielle.freville.mareu1.model;
 
 
 import androidx.annotation.NonNull;
 
 import java.io.Serializable;
+
+import gabrielle.freville.mareu1.R;
 
 public enum Room implements Serializable {
     MARIO(R.color.brightred, "Mario"),

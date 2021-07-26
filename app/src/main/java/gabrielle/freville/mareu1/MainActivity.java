@@ -19,6 +19,7 @@ import java.util.Collections;
 import gabrielle.freville.mareu1.api.ApiService;
 import gabrielle.freville.mareu1.api.DependencyInjection;
 import gabrielle.freville.mareu1.model.Meeting;
+import gabrielle.freville.mareu1.model.Room;
 
 public class MainActivity extends AppCompatActivity implements StrainMeetingsDialogFragment.ConfirmFilterListener {
 

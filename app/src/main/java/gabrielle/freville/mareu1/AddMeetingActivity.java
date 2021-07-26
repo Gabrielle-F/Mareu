@@ -3,16 +3,12 @@ package gabrielle.freville.mareu1;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Adapter;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TimePicker;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,21 +20,23 @@ import java.util.Locale;
 import gabrielle.freville.mareu1.api.DependencyInjection;
 import gabrielle.freville.mareu1.api.MeetingsApiService;
 import gabrielle.freville.mareu1.model.Meeting;
+import gabrielle.freville.mareu1.model.Room;
 
 public class AddMeetingActivity extends AppCompatActivity {
 
     public EditText editTextDate;
     public EditText editTextTime;
+    public Spinner mRoomSpinner;
+    public EditText mParticipants;
+    public Button mCancel;
+    public Button mCreate;
+
     public int selectedYear;
     public int selectedMonth;
     public int selectedDay;
     public int selectedHour;
     public int selectedMinute;
-    public Spinner mRoomSpinner;
-    public EditText mParticipants;
-    public Button mCancel;
-    public Button mCreate;
-    public Room mRoom;
+
     private MeetingsApiService mApiService;
     public DatePickerDialog mDatePickerDialog;
     public TimePickerDialog mTimePickerDialog;

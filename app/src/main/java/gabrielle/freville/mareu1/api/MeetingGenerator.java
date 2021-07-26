@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import gabrielle.freville.mareu1.Room;
+import gabrielle.freville.mareu1.model.Room;
 import gabrielle.freville.mareu1.model.Meeting;
 
 public class MeetingGenerator {

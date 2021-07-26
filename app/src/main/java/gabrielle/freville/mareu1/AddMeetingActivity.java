@@ -56,64 +56,34 @@ public class AddMeetingActivity extends AppCompatActivity {
         editTextDate = findViewById(R.id.select_date);
         editTextTime = findViewById(R.id.select_hour);
         mParticipants = findViewById(R.id.select_participants);
-        mParticipants.setHint("Entrez le mail des participants");
         mCancel = findViewById(R.id.button_cancel);
         mCreate = findViewById(R.id.button_validate);
+
         initDatePicker();
         initTimePicker();
-        setAdapterToSpinner();
-
-        mCreate.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                confirmCreationOfMeeting();
-                finish();
-            }
-        });
-
-        mCancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AddMeetingActivity.this.finish();
-            }
-        });
-
-        editTextDate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mDatePickerDialog.show();
-            }
-        });
-
-        editTextTime.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mTimePickerDialog.show();
-            }
-        });
+        initSpinner();
     }
 
-    public void setAdapterToSpinner(){
-        ArrayAdapter <Room> adapter = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, Room.values());
-        this.mRoomSpinner.setAdapter(adapter);
-        this.mRoomSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Adapter adapter1 = parent.getAdapter();
-                Room room = (Room) adapter1.getItem(position);
-                Toast.makeText(getApplicationContext(), "Sélectionnez une salle:" + room.toString(), Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
+    private void initListeners(){
+        mCreate.setOnClickListener(v -> {
+            confirmCreationOfMeeting();
+            finish();
         });
+
+        mCancel.setOnClickListener(v -> AddMeetingActivity.this.finish());
+
+        editTextDate.setOnClickListener(v -> mDatePickerDialog.show());
+
+        editTextTime.setOnClickListener(v -> mTimePickerDialog.show());
+    }
+
+    public void initSpinner(){
+        ArrayAdapter <Room> adapter = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, Room.values());
+        mRoomSpinner.setAdapter(adapter);
     }
 
     public Room getRoom(){
-        Room pRoom = (Room) mRoomSpinner.getSelectedItem();
-        return pRoom;
+        return (Room) mRoomSpinner.getSelectedItem();
     }
 
     //** Initialisation du TimePicker et affichage de celui-ci puis récupération de la date */

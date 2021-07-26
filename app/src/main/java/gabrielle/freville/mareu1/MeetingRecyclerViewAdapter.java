@@ -1,8 +1,6 @@
 package gabrielle.freville.mareu1;
 
-import android.graphics.Color;
-import android.graphics.drawable.Drawable;
-import android.util.Log;
+import android.content.res.ColorStateList;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,12 +10,14 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
-import androidx.core.graphics.drawable.DrawableCompat;
+import androidx.core.widget.ImageViewCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-import controller.ApiService;
+import gabrielle.freville.mareu1.api.ApiService;
+import gabrielle.freville.mareu1.api.DependencyInjection;
+import gabrielle.freville.mareu1.model.Meeting;
 
 public class MeetingRecyclerViewAdapter extends RecyclerView.Adapter<MeetingRecyclerViewAdapter.ViewHolder> {
 
@@ -26,8 +26,7 @@ public class MeetingRecyclerViewAdapter extends RecyclerView.Adapter<MeetingRecy
     public MeetingRecyclerViewAdapter(List<Meeting> items){
         mMeeting = items;
     }
-    public ApiService mApiService;
-    public Room mRoomSticker;
+    public ApiService mApiService = DependencyInjection.getMeetingsApiService();
 
     @NonNull
     @Override
@@ -38,19 +37,27 @@ public class MeetingRecyclerViewAdapter extends RecyclerView.Adapter<MeetingRecy
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        final Meeting meeting = mMeeting.get(position);
+    public void onBindViewHolder(final ViewHolder holder, int position) {
+        Meeting meeting = mMeeting.get(position);
 
         holder.mMeetingHourAndRoom.setText(holder.itemView.getContext().getString(R.string.meeting_title, meeting.getHour(), meeting.getRoom()));
         holder.mMeetingParticipants.setText(meeting.getParticipants());
-        holder.mMeetingSticker.setColorFilter(ContextCompat.getColor(holder.itemView.getContext(), meeting.getRoom().color), android.graphics.PorterDuff.Mode.MULTIPLY);
-        holder.mDeleteMeeting.setOnClickListener(new View.OnClickListener() {
+        ImageViewCompat.setImageTintList(
+                holder.mMeetingSticker,
+                ColorStateList.valueOf(
+                        ContextCompat.getColor(
+                                holder.itemView.getContext(),
+                                meeting.getRoom().getColor()
+                        )
+                )
+        );
+
+     /* holder.mDeleteMeeting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                  mApiService.deleteMeeting(meeting);
             }
-        });
-
+        });*/
     }
 
     @Override

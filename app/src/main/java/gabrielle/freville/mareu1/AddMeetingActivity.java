@@ -40,7 +40,6 @@ public class AddMeetingActivity extends AppCompatActivity {
     public Button mCreate;
     public Room mRoom;
     private MeetingsApiService mApiService;
-    public boolean is24H = true;
     public DatePickerDialog mDatePickerDialog;
     public TimePickerDialog mTimePickerDialog;
     final Calendar calendar = Calendar.getInstance();
@@ -97,15 +96,7 @@ public class AddMeetingActivity extends AppCompatActivity {
             }
         };
         mTimePickerDialog = new TimePickerDialog(this, android.R.style.Theme_Holo_Light_Dialog_NoActionBar,
-                timeSetListener, selectedHour, selectedMinute, is24H);
-    }
-
-    //** Attribuer l'heure à l'EditText et la convertir en texte */
-    public void setStringTime(){
-        calendar.set(selectedHour, selectedMinute);
-        SimpleDateFormat formatter = new SimpleDateFormat("HH:mm", Locale.FRANCE);
-        String time = formatter.format(calendar.getTime());
-        editTextTime.setText(time);
+                timeSetListener, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), true);
     }
 
     //** Initialisation du DatePicker et affichage de celui-ci puis récupération de la date */
@@ -120,7 +111,7 @@ public class AddMeetingActivity extends AppCompatActivity {
             }
         };
         mDatePickerDialog = new DatePickerDialog(this, android.R.style.Theme_Holo_Light_Dialog_NoActionBar,
-                dateSetListener, selectedYear, selectedMonth, selectedDay);
+                dateSetListener, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
     }
 
     //** Attribuer la date au EditText et la convertir en texte */
@@ -129,6 +120,14 @@ public class AddMeetingActivity extends AppCompatActivity {
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy", Locale.FRANCE);
         String date = formatter.format(calendar.getTime());
         editTextDate.setText(date);
+    }
+
+    //** Attribuer l'heure à l'EditText et la convertir en texte */
+    public void setStringTime(){
+        calendar.set(selectedHour, selectedMinute);
+        SimpleDateFormat formatter = new SimpleDateFormat("HH:mm", Locale.FRANCE);
+        String time = formatter.format(calendar.getTime());
+        editTextTime.setText(time);
     }
 
     private void confirmCreationOfMeeting(){

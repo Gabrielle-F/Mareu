@@ -21,8 +21,9 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
-import controller.DependencyInjection;
-import controller.MeetingsApiService;
+import gabrielle.freville.mareu1.api.DependencyInjection;
+import gabrielle.freville.mareu1.api.MeetingsApiService;
+import gabrielle.freville.mareu1.model.Meeting;
 
 public class AddMeetingActivity extends AppCompatActivity {
 

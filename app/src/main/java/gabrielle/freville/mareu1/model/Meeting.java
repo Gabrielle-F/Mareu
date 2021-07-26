@@ -1,8 +1,14 @@
-package gabrielle.freville.mareu1;
+package gabrielle.freville.mareu1.model;
 
 import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
-public class Meeting implements Serializable{
+import gabrielle.freville.mareu1.Room;
+
+public class Meeting implements Serializable, Comparable<Meeting> {
 
     private String mHour;
     private String mDate;
@@ -16,6 +22,17 @@ public class Meeting implements Serializable{
         this.mParticipants=participants;
     }
 
+    public Date getFormattedDate(){
+        String dateString = mDate + " " + mHour;
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yy HH'h'mm", Locale.FRANCE);
+        try {
+            return formatter.parse(dateString);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return new Date();
+        }
+    }
+
     public String getDate() { return mDate; }
     public void setDate(String date) { this.mDate=date; }
 
@@ -27,4 +44,9 @@ public class Meeting implements Serializable{
 
     public String getParticipants() { return mParticipants; }
     public void setParticipants(String participants) { this.mParticipants=participants; }
+
+    @Override
+    public int compareTo(Meeting other) {
+        return getFormattedDate().compareTo(other.getFormattedDate());
+    }
 }

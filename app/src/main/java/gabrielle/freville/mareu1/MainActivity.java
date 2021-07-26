@@ -14,9 +14,11 @@ import android.view.MenuItem;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
-import controller.ApiService;
-import controller.DependencyInjection;
+import gabrielle.freville.mareu1.api.ApiService;
+import gabrielle.freville.mareu1.api.DependencyInjection;
+import gabrielle.freville.mareu1.model.Meeting;
 
 public class MainActivity extends AppCompatActivity implements StrainMeetingsDialogFragment.ConfirmFilterListener {
 
@@ -33,7 +35,7 @@ public class MainActivity extends AppCompatActivity implements StrainMeetingsDia
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mApiService = DependencyInjection.getNewInstanceApiService();
+        mApiService = DependencyInjection.getMeetingsApiService();
         mRecyclerView = findViewById(R.id.activity_main_recyclerview);
         mFabAddMeeting = findViewById(R.id.button_add_meeting);
         initList();
@@ -65,6 +67,7 @@ public class MainActivity extends AppCompatActivity implements StrainMeetingsDia
     //** Initialiser la liste des réunions */
     public void initList(){
         mMeetings = mApiService.getMeetings();
+        Collections.sort(mMeetings);
         mAdapter = new MeetingRecyclerViewAdapter(mMeetings);
         mRecyclerView.setAdapter(mAdapter);
     }

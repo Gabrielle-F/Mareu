@@ -1,10 +1,9 @@
-package controller;
+package gabrielle.freville.mareu1.api;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import gabrielle.freville.mareu1.Meeting;
-import gabrielle.freville.mareu1.MeetingGenerator;
+import gabrielle.freville.mareu1.model.Meeting;
 import gabrielle.freville.mareu1.StrainMeetingsDialogFragment;
 
 public class MeetingsApiService implements ApiService {

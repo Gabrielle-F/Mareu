@@ -2,14 +2,9 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
-        <item name="android:actionOverflowButtonStyle">@style/ActionBarIcon</item>
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-    </style>
-
-    <style name="ActionBarIcon">
-        <item name="android:src">@drawable/ic_baseline_filter_list</item>
     </style>
 
 </resources>

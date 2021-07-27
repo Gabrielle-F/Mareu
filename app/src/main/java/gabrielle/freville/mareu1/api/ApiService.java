@@ -3,7 +3,7 @@ package gabrielle.freville.mareu1.api;
 import java.util.ArrayList;
 
 import gabrielle.freville.mareu1.model.Meeting;
-import gabrielle.freville.mareu1.StrainMeetingsDialogFragment;
+import gabrielle.freville.mareu1.ui.StrainMeetingsDialogFragment;
 
 public interface ApiService {
 

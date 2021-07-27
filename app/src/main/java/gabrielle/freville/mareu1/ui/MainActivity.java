@@ -1,4 +1,4 @@
-package gabrielle.freville.mareu1;
+package gabrielle.freville.mareu1.ui;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,6 +16,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import gabrielle.freville.mareu1.R;
 import gabrielle.freville.mareu1.api.ApiService;
 import gabrielle.freville.mareu1.api.DependencyInjection;
 import gabrielle.freville.mareu1.model.Meeting;

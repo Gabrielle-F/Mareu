@@ -1,4 +1,4 @@
-package gabrielle.freville.mareu1;
+package gabrielle.freville.mareu1.ui;
 
 import android.app.DatePickerDialog;
 import android.os.Bundle;
@@ -22,6 +22,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
+import gabrielle.freville.mareu1.R;
 import gabrielle.freville.mareu1.model.Room;
 
 public class StrainMeetingsDialogFragment extends DialogFragment {
@@ -64,9 +65,11 @@ public class StrainMeetingsDialogFragment extends DialogFragment {
         mRoom = view.findViewById(R.id.strain_meetings_spinner);
         mValidate = view.findViewById(R.id.strain_meetings_confirm_button);
         mCancel = view.findViewById(R.id.strain_meetings_cancel_button);
+
         initDatePicker();
         initListeners();
         initSpinner();
+
         return view;
     }
 

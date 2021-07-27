@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import gabrielle.freville.mareu1.model.Meeting;
-import gabrielle.freville.mareu1.StrainMeetingsDialogFragment;
+import gabrielle.freville.mareu1.ui.StrainMeetingsDialogFragment;
 
 public class MeetingsApiService implements ApiService {
 

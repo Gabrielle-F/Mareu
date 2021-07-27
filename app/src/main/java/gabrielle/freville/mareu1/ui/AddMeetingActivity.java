@@ -1,4 +1,4 @@
-package gabrielle.freville.mareu1;
+package gabrielle.freville.mareu1.ui;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
@@ -17,6 +17,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
+import gabrielle.freville.mareu1.R;
 import gabrielle.freville.mareu1.api.DependencyInjection;
 import gabrielle.freville.mareu1.api.MeetingsApiService;
 import gabrielle.freville.mareu1.model.Meeting;

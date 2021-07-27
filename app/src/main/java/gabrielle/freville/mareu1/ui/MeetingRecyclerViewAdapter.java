@@ -1,4 +1,4 @@
-package gabrielle.freville.mareu1;
+package gabrielle.freville.mareu1.ui;
 
 import android.content.res.ColorStateList;
 import android.view.LayoutInflater;
@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
+import gabrielle.freville.mareu1.R;
 import gabrielle.freville.mareu1.api.ApiService;
 import gabrielle.freville.mareu1.api.DependencyInjection;
 import gabrielle.freville.mareu1.model.Meeting;

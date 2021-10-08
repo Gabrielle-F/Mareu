@@ -8,20 +8,20 @@ import java.util.Locale;
 
 public class Meeting implements Serializable, Comparable<Meeting> {
 
-    private String mHour;
-    private String mDate;
-    private Room mRoom;
-    private String mParticipants;
+    private String hour;
+    private String date;
+    private Room room;
+    private String participants;
 
     public Meeting(String date, String hour, Room room, String participants) {
-        this.mDate=date;
-        this.mHour=hour;
-        this.mRoom=room;
-        this.mParticipants=participants;
+        this.date=date;
+        this.hour=hour;
+        this.room=room;
+        this.participants=participants;
     }
 
     public Date getFormattedDate(){
-        String dateString = mDate + " " + mHour;
+        String dateString = date + " " + hour;
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yy HH'h'mm", Locale.FRANCE);
         try {
             return formatter.parse(dateString);
@@ -31,17 +31,17 @@ public class Meeting implements Serializable, Comparable<Meeting> {
         }
     }
 
-    public String getDate() { return mDate; }
-    public void setDate(String date) { this.mDate=date; }
+    public String getDate() { return date; }
+    public void setDate(String date) { this.date=date; }
 
-    public String getHour() { return mHour; }
-    public void setHour(String hour) { this.mHour=hour; }
+    public String getHour() { return hour; }
+    public void setHour(String hour) { this.hour=hour; }
 
-    public Room getRoom() { return mRoom; }
-    public void setRoom(Room room) { this.mRoom=room; }
+    public Room getRoom() { return room; }
+    public void setRoom(Room room) { this.room=room; }
 
-    public String getParticipants() { return mParticipants; }
-    public void setParticipants(String participants) { this.mParticipants=participants; }
+    public String getParticipants() { return participants; }
+    public void setParticipants(String participants) { this.participants=participants; }
 
     @Override
     public int compareTo(Meeting other) {

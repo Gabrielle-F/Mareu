@@ -2,7 +2,7 @@ package gabrielle.freville.mareu1.api;
 
 public class DependencyInjection {
 
-    private static MeetingsApiService mApiService = new MeetingsApiService();
+    private static MeetingApiService apiService = new MeetingApiService();
 
-    public static MeetingsApiService getMeetingsApiService() { return mApiService; }
+    public static MeetingApiService getMeetingsApiService() { return apiService; }
 }

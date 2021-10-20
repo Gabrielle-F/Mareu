@@ -16,18 +16,16 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import gabrielle.freville.mareu1.R;
-import gabrielle.freville.mareu1.api.ApiService;
-import gabrielle.freville.mareu1.api.DependencyInjection;
 import gabrielle.freville.mareu1.model.Meeting;
 
-public class MeetingRecyclerViewAdapter extends RecyclerView.Adapter<MeetingRecyclerViewAdapter.ViewHolder> {
+public class MeetingAdapter extends RecyclerView.Adapter<MeetingAdapter.ViewHolder> {
 
-    private final List<Meeting> mMeeting;
+    private final List<Meeting> meetings;
+    public MeetingAdapterInterface adapterInterface;
 
-    public MeetingRecyclerViewAdapter(List<Meeting> items){
-        mMeeting = items;
-    }
-    public ApiService mApiService = DependencyInjection.getMeetingsApiService();
+    public MeetingAdapter(List<Meeting> items, MeetingAdapterInterface meetingAdapterInterface){
+        meetings = items;
+        adapterInterface = meetingAdapterInterface; }
 
     @NonNull
     @Override
@@ -39,12 +37,15 @@ public class MeetingRecyclerViewAdapter extends RecyclerView.Adapter<MeetingRecy
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
-        Meeting meeting = mMeeting.get(position);
+        Meeting meeting = meetings.get(position);
 
-        holder.mMeetingHourAndRoom.setText(holder.itemView.getContext().getString(R.string.meeting_title, meeting.getHour(), meeting.getRoom()));
-        holder.mMeetingParticipants.setText(meeting.getParticipants());
+        holder.meetingHourAndRoom.setText(holder.itemView.getContext().getString
+                (R.string.meeting_title,
+                        meeting.getHour(),
+                        meeting.getRoom()));
+        holder.meetingParticipants.setText(meeting.getParticipants());
         ImageViewCompat.setImageTintList(
-                holder.mMeetingSticker,
+                holder.meetingSticker,
                 ColorStateList.valueOf(
                         ContextCompat.getColor(
                                 holder.itemView.getContext(),
@@ -52,33 +53,36 @@ public class MeetingRecyclerViewAdapter extends RecyclerView.Adapter<MeetingRecy
                         )
                 )
         );
-
-     /* holder.mDeleteMeeting.setOnClickListener(new View.OnClickListener() {
+        holder.deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                 mApiService.deleteMeeting(meeting);
+                adapterInterface.deleteMeeting(meeting);
             }
-        });*/
+        });
+    }
+    
+    public interface MeetingAdapterInterface {
+        void deleteMeeting(Meeting meeting);
     }
 
     @Override
     public int getItemCount() {
-        return mMeeting.size();
+        return meetings.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        ImageView mMeetingSticker;
-        TextView mMeetingHourAndRoom;
-        TextView mMeetingParticipants;
-        ImageButton mDeleteMeeting;
+        ImageView meetingSticker;
+        TextView meetingHourAndRoom;
+        TextView meetingParticipants;
+        ImageButton deleteButton;
 
         public ViewHolder(@NonNull View itemView) {
 
             super(itemView);
-            mMeetingSticker = itemView.findViewById(R.id.meeting_sticker);
-            mMeetingHourAndRoom = itemView.findViewById(R.id.meeting_hour_room);
-            mMeetingParticipants = itemView.findViewById(R.id.meeting_participants);
-            mDeleteMeeting = itemView.findViewById(R.id.meeting_delete_button);
+            meetingSticker = itemView.findViewById(R.id.meeting_sticker);
+            meetingHourAndRoom = itemView.findViewById(R.id.meeting_hour_room);
+            meetingParticipants = itemView.findViewById(R.id.meeting_participants);
+            deleteButton = itemView.findViewById(R.id.meeting_delete_button);
         }
     }
 }

@@ -17,32 +17,37 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 import gabrielle.freville.mareu1.R;
-import gabrielle.freville.mareu1.api.ApiService;
 import gabrielle.freville.mareu1.api.DependencyInjection;
+import gabrielle.freville.mareu1.api.MeetingApiService;
 import gabrielle.freville.mareu1.model.Meeting;
 import gabrielle.freville.mareu1.model.Room;
 
-public class MainActivity extends AppCompatActivity implements StrainMeetingsDialogFragment.ConfirmFilterListener {
+public class MainActivity extends AppCompatActivity implements FilterMeetingsDialogFragment.ConfirmFilterListener, MeetingAdapter.MeetingAdapterInterface {
 
-    private FloatingActionButton mFabAddMeeting;
-    private ApiService mApiService;
-    private String mDate;
-    private Room mRoom;
-    private ArrayList<Meeting> mMeetings;
+    private FloatingActionButton fabAddMeeting;
+    private MeetingApiService apiService;
+    private String date;
+    private Room room;
+    private ArrayList<Meeting> meetings;
 
-    public RecyclerView mRecyclerView;
-    public MeetingRecyclerViewAdapter mAdapter;
+    public RecyclerView recyclerView;
+    public MeetingAdapter adapter;
+    public Meeting meetingToDelete;
+    public MeetingAdapter.MeetingAdapterInterface meetingAdapterInterface;
+    public FilterMeetingsDialogFragment.ConfirmFilterListener confirmFilterListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mApiService = DependencyInjection.getMeetingsApiService();
-        mRecyclerView = findViewById(R.id.activity_main_recyclerview);
-        mFabAddMeeting = findViewById(R.id.button_add_meeting);
+        apiService = DependencyInjection.getMeetingsApiService();
+        recyclerView = findViewById(R.id.activity_main_recyclerview);
+        fabAddMeeting = findViewById(R.id.button_add_meeting);
+        meetingAdapterInterface = this;
+        confirmFilterListener = this;
         initList();
 
-        mFabAddMeeting.setOnClickListener(v -> {
+        fabAddMeeting.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, AddMeetingActivity.class);
             startActivity(intent);
         });
@@ -58,9 +63,9 @@ public class MainActivity extends AppCompatActivity implements StrainMeetingsDia
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.strain_action:
-                showStrainMeetingsDialog();
-                confirmFilter(mRoom, mDate);
+            case R.id.filter_action:
+                showFilterMeetingsDialog();
+                confirmFilter(room, date);
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -68,17 +73,17 @@ public class MainActivity extends AppCompatActivity implements StrainMeetingsDia
 
     //** Initialiser la liste des réunions */
     public void initList(){
-        mMeetings = mApiService.getMeetings();
-        Collections.sort(mMeetings);
-        mAdapter = new MeetingRecyclerViewAdapter(mMeetings);
-        mRecyclerView.setAdapter(mAdapter);
+        meetings = apiService.getMeetings();
+        Collections.sort(meetings);
+        adapter = new MeetingAdapter(meetings, this);
+        recyclerView.setAdapter(adapter);
     }
 
     //** Mettre la liste à jour */
     private void updateList(){
-        mMeetings.clear();
-        mMeetings.addAll(mApiService.getMeetings());
-        mAdapter.notifyDataSetChanged();
+        meetings.clear();
+        meetings.addAll(apiService.getMeetings());
+        adapter.notifyDataSetChanged();
     }
 
     @Override
@@ -88,17 +93,24 @@ public class MainActivity extends AppCompatActivity implements StrainMeetingsDia
     }
 
     //** Show Pop Up for strain meetings */
-    private void showStrainMeetingsDialog(){
+    private void showFilterMeetingsDialog(){
         FragmentManager fragmentManager = getSupportFragmentManager();
-        StrainMeetingsDialogFragment strainMeetingsDialogFragment = StrainMeetingsDialogFragment.newInstance(mRoom, mDate);
-        strainMeetingsDialogFragment.showNow(fragmentManager, "strain_meeting_dialog");
+        FilterMeetingsDialogFragment filterMeetingsDialogFragment = FilterMeetingsDialogFragment.newInstance(room, date);
+        filterMeetingsDialogFragment.showNow(fragmentManager, "strain_meeting_dialog");
     }
 
-    //** Get Strain Meetings */
+    //** Get Filter Meetings */
     @Override
     public void confirmFilter(Room pRoom, String pDate) {
-        mRoom = pRoom;
-        mDate = pDate;
+        room = pRoom;
+        date = pDate;
+        updateList();
+    }
+
+    @Override
+    public void deleteMeeting(Meeting meeting) {
+        meetingToDelete = meeting;
+        apiService.deleteMeeting(meetingToDelete);
         updateList();
     }
 }

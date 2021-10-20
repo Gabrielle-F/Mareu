@@ -19,7 +19,7 @@ import java.util.Locale;
 
 import gabrielle.freville.mareu1.R;
 import gabrielle.freville.mareu1.api.DependencyInjection;
-import gabrielle.freville.mareu1.api.MeetingsApiService;
+import gabrielle.freville.mareu1.api.MeetingApiService;
 import gabrielle.freville.mareu1.model.Meeting;
 import gabrielle.freville.mareu1.model.Room;
 
@@ -27,10 +27,10 @@ public class AddMeetingActivity extends AppCompatActivity {
 
     public EditText editTextDate;
     public EditText editTextTime;
-    public Spinner mRoomSpinner;
-    public EditText mParticipants;
-    public Button mCancel;
-    public Button mCreate;
+    public Spinner roomSpinner;
+    public EditText participants;
+    public Button cancel;
+    public Button create;
 
     public int selectedYear;
     public int selectedMonth;
@@ -38,9 +38,9 @@ public class AddMeetingActivity extends AppCompatActivity {
     public int selectedHour;
     public int selectedMinute;
 
-    private MeetingsApiService mApiService;
-    public DatePickerDialog mDatePickerDialog;
-    public TimePickerDialog mTimePickerDialog;
+    private MeetingApiService apiService;
+    public DatePickerDialog datePickerDialog;
+    public TimePickerDialog timePickerDialog;
     final Calendar calendar = Calendar.getInstance();
 
     @Override
@@ -48,14 +48,14 @@ public class AddMeetingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_meeting);
 
-        mApiService = DependencyInjection.getMeetingsApiService();
+        apiService = DependencyInjection.getMeetingsApiService();
 
-        mRoomSpinner = findViewById(R.id.spinner_room_add_meeting);
+        roomSpinner = findViewById(R.id.spinner_room_add_meeting);
         editTextDate = findViewById(R.id.select_date);
         editTextTime = findViewById(R.id.select_hour);
-        mParticipants = findViewById(R.id.select_participants);
-        mCancel = findViewById(R.id.button_cancel);
-        mCreate = findViewById(R.id.button_validate);
+        participants = findViewById(R.id.select_participants);
+        cancel = findViewById(R.id.button_cancel);
+        create = findViewById(R.id.button_validate);
 
         initDatePicker();
         initTimePicker();
@@ -64,25 +64,28 @@ public class AddMeetingActivity extends AppCompatActivity {
     }
 
     private void initListeners(){
-        mCreate.setOnClickListener(v -> {
+        create.setOnClickListener(v -> {
             confirmCreationOfMeeting();
             finish();
         });
 
-        mCancel.setOnClickListener(v -> AddMeetingActivity.this.finish());
+        cancel.setOnClickListener(v -> AddMeetingActivity.this.finish());
 
-        editTextDate.setOnClickListener(v -> mDatePickerDialog.show());
+        editTextDate.setOnClickListener(v -> datePickerDialog.show());
 
-        editTextTime.setOnClickListener(v -> mTimePickerDialog.show());
+        editTextTime.setOnClickListener(v -> timePickerDialog.show());
     }
 
+    //** Initialisation du Spinner pour le choix de la salle */
     public void initSpinner(){
-        ArrayAdapter <Room> adapter = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, Room.values());
-        mRoomSpinner.setAdapter(adapter);
+        ArrayAdapter <Room> adapter = new ArrayAdapter<>(this,
+                R.layout.support_simple_spinner_dropdown_item,
+                Room.values());
+        roomSpinner.setAdapter(adapter);
     }
 
     public Room getRoom(){
-        return (Room) mRoomSpinner.getSelectedItem();
+        return (Room) roomSpinner.getSelectedItem();
     }
 
     //** Initialisation du TimePicker et affichage de celui-ci puis récupération de la date */
@@ -95,7 +98,7 @@ public class AddMeetingActivity extends AppCompatActivity {
                 setStringTime();
             }
         };
-        mTimePickerDialog = new TimePickerDialog(this, android.R.style.Theme_Material_Dialog,
+        timePickerDialog = new TimePickerDialog(this, android.R.style.Theme_Material_Dialog,
                 timeSetListener, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), true);
     }
 
@@ -110,7 +113,7 @@ public class AddMeetingActivity extends AppCompatActivity {
                 setStringDate();
             }
         };
-        mDatePickerDialog = new DatePickerDialog(this, android.R.style.Theme_Material_Dialog,
+        datePickerDialog = new DatePickerDialog(this, android.R.style.Theme_Material_Dialog,
                 dateSetListener, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
     }
 
@@ -135,9 +138,9 @@ public class AddMeetingActivity extends AppCompatActivity {
                 editTextDate.getEditableText().toString(),
                 editTextTime.getEditableText().toString(),
                 getRoom(),
-                mParticipants.getEditableText().toString()
+                participants.getEditableText().toString()
         );
-        mApiService.createMeeting(meeting);
+        apiService.createMeeting(meeting);
     }
 
 }

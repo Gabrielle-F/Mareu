@@ -3,10 +3,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@null">
+    android:background="@null"
+    android:id="@+id/dialog_fragment">
 
     <LinearLayout
-        android:id="@+id/strain_meetings_linearlayout"
+        android:id="@+id/filter_meetings_linearlayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -27,7 +28,7 @@
             />
 
         <Spinner
-            android:id="@+id/strain_meetings_spinner"
+            android:id="@+id/filter_meetings_spinner"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
@@ -36,10 +37,10 @@
     </LinearLayout>
 
     <EditText
-        android:id="@+id/strain_meetings_select_date"
+        android:id="@+id/filter_meetings_select_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/strain_meetings_linearlayout"
+        app:layout_constraintTop_toBottomOf="@+id/filter_meetings_linearlayout"
         android:gravity="center"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -51,7 +52,7 @@
         android:padding="20dp"/>
 
     <Button
-        android:id="@+id/strain_meetings_confirm_button"
+        android:id="@+id/filter_meetings_confirm_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
@@ -64,7 +65,7 @@
         />
 
     <Button
-        android:id="@+id/strain_meetings_cancel_button"
+        android:id="@+id/filter_meetings_cancel_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"

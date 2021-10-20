@@ -62,10 +62,10 @@ public class FilterMeetingsDialogFragment extends DialogFragment {
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.dialog_fragment_filter, container);
-        editTextDate = view.findViewById(R.id.strain_meetings_select_date);
-        roomSpinner = view.findViewById(R.id.strain_meetings_spinner);
-        validateButton = view.findViewById(R.id.strain_meetings_confirm_button);
-        cancelButton = view.findViewById(R.id.strain_meetings_cancel_button);
+        editTextDate = view.findViewById(R.id.filter_meetings_select_date);
+        roomSpinner = view.findViewById(R.id.filter_meetings_spinner);
+        validateButton = view.findViewById(R.id.filter_meetings_confirm_button);
+        cancelButton = view.findViewById(R.id.filter_meetings_cancel_button);
 
         initDatePicker();
         initListeners();

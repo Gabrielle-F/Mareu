@@ -1,6 +1,7 @@
 package gabrielle.freville.mareu1.ui;
 
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,34 +26,34 @@ import java.util.Locale;
 import gabrielle.freville.mareu1.R;
 import gabrielle.freville.mareu1.model.Room;
 
-public class StrainMeetingsDialogFragment extends DialogFragment {
+public class FilterMeetingsDialogFragment extends DialogFragment {
 
-    private EditText mEditTextDate;
-    private Button mCancel;
-    private Button mValidate;
-    private Spinner mRoom;
-    public DatePickerDialog mDatePickerDialog;
+    private EditText editTextDate;
+    private Button cancelButton;
+    private Button validateButton;
+    private Spinner roomSpinner;
+    public DatePickerDialog datePickerDialog;
 
     public int selectedYear;
     public int selectedMonth;
     public int selectedDay;
 
-    public ConfirmFilterListener mOnConfirmFilterListener;
-    public Bundle mBundle;
+    public ConfirmFilterListener onConfirmFilterListener;
+    public Bundle bundle;
     final Calendar calendar = Calendar.getInstance();
 
-    public static StrainMeetingsDialogFragment newInstance(Room pRoom, String pDate) {
+    public static FilterMeetingsDialogFragment newInstance(Room pRoom, String pDate) {
         Bundle mBundle = new Bundle();
         mBundle.putSerializable("Room", pRoom);
         mBundle.putString("Date", pDate);
 
-        StrainMeetingsDialogFragment fragment = new StrainMeetingsDialogFragment();
+        FilterMeetingsDialogFragment fragment = new FilterMeetingsDialogFragment();
         fragment.setArguments(mBundle);
         return fragment;
     }
 
     public void readBundle(){
-        mBundle = getArguments();
+        bundle = getArguments();
     }
 
     @Nullable
@@ -61,10 +62,10 @@ public class StrainMeetingsDialogFragment extends DialogFragment {
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.dialog_fragment_filter, container);
-        mEditTextDate = view.findViewById(R.id.strain_meetings_select_date);
-        mRoom = view.findViewById(R.id.strain_meetings_spinner);
-        mValidate = view.findViewById(R.id.strain_meetings_confirm_button);
-        mCancel = view.findViewById(R.id.strain_meetings_cancel_button);
+        editTextDate = view.findViewById(R.id.strain_meetings_select_date);
+        roomSpinner = view.findViewById(R.id.strain_meetings_spinner);
+        validateButton = view.findViewById(R.id.strain_meetings_confirm_button);
+        cancelButton = view.findViewById(R.id.strain_meetings_cancel_button);
 
         initDatePicker();
         initListeners();
@@ -74,38 +75,40 @@ public class StrainMeetingsDialogFragment extends DialogFragment {
     }
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        onConfirmFilterListener = (ConfirmFilterListener)context;
     }
 
     private void initListeners(){
-        mCancel.setOnClickListener(new View.OnClickListener() {
+        cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dismiss();
             }
         });
 
-        mValidate.setOnClickListener(new View.OnClickListener() {
+        validateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getFilter();
+                confirmFilter();
                 dismiss();
-                StrainMeetingsDialog(mOnConfirmFilterListener);
             }
         });
 
-        mEditTextDate.setOnClickListener(new View.OnClickListener() {
+        editTextDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mDatePickerDialog.show();
+                datePickerDialog.show();
             }
         });
     }
 
     private void initSpinner(){
-        ArrayAdapter adapter = new ArrayAdapter<Room>(getContext(), R.layout.support_simple_spinner_dropdown_item, Room.values());
-        mRoom.setAdapter(adapter);
+        ArrayAdapter adapter = new ArrayAdapter<Room>(getContext(),
+                R.layout.support_simple_spinner_dropdown_item,
+                Room.values());
+        roomSpinner.setAdapter(adapter);
     }
 
     @Override
@@ -128,7 +131,7 @@ public class StrainMeetingsDialogFragment extends DialogFragment {
                 setStringDate();
             }
         };
-        mDatePickerDialog = new DatePickerDialog(getContext(), android.R.style.Theme_Material_Dialog,
+        datePickerDialog = new DatePickerDialog(getContext(), android.R.style.Theme_Material_Dialog,
                 dateSetListener, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
     }
 
@@ -136,27 +139,21 @@ public class StrainMeetingsDialogFragment extends DialogFragment {
         calendar.set(selectedYear, selectedMonth, selectedDay);
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy", Locale.FRANCE);
         String date = formatter.format(calendar.getTime());
-        mEditTextDate.setText(date);
+        editTextDate.setText(date);
     }
 
-    public Room getRoom(){
-        return (Room) mRoom.getSelectedItem();
-
-    }
-
-    public void StrainMeetingsDialog(ConfirmFilterListener listener){
-        this.mOnConfirmFilterListener = listener;
+    public Room getRoomSpinner(){
+        return (Room) roomSpinner.getSelectedItem();
     }
 
     public interface ConfirmFilterListener{
-        void confirmFilter(Room pRoom, String pDate);
+        void confirmFilter(Room room, String date);
     }
 
-    public void getFilter(){
-        final ConfirmFilterListener vOnConfirmFilterListener = mOnConfirmFilterListener;
-        final Room vRoomFilter = getRoom();
-        final String vDateFilter = mEditTextDate.getEditableText().toString();
-        vOnConfirmFilterListener.confirmFilter(vRoomFilter, vDateFilter);
+    public void confirmFilter(){
+        final Room roomFilter = getRoomSpinner();
+        final String dateFilter = editTextDate.getEditableText().toString();
+        onConfirmFilterListener.confirmFilter(roomFilter, dateFilter);
     }
 
     @Override

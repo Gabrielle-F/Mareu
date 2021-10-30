@@ -24,7 +24,6 @@ import gabrielle.freville.mareu1.model.Room;
 
 public class MainActivity extends AppCompatActivity implements FilterMeetingsDialogFragment.ConfirmFilterListener, MeetingAdapter.MeetingAdapterInterface {
 
-    private FloatingActionButton fabAddMeeting;
     private MeetingApiService apiService;
     private String date;
     private Room room;
@@ -107,10 +106,12 @@ public class MainActivity extends AppCompatActivity implements FilterMeetingsDia
         updateList();
     }
 
+    //** Delete meeting */
     @Override
     public void deleteMeeting(Meeting meeting) {
         meetingToDelete = meeting;
         apiService.deleteMeeting(meetingToDelete);
-        updateList();
+        meetings.remove(meeting);
+        adapter.notifyDataSetChanged();
     }
 }

@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import gabrielle.freville.mareu1.model.Meeting;
-import gabrielle.freville.mareu1.ui.FilterMeetingsDialogFragment;
 
 public class MeetingApiService implements ApiService {
 
@@ -15,16 +14,12 @@ public class MeetingApiService implements ApiService {
     }
 
     @Override
-    public void createMeeting(Meeting meeting) {
-            meetings.add(meeting);
-    }
+    public void createMeeting(Meeting meeting) { meetings.add(meeting); }
 
     @Override
     public ArrayList<Meeting> getMeetings() { return new ArrayList<>(meetings); }
 
     @Override
-    public void deleteMeeting(Meeting meeting) {
-        meetings.remove(meeting);
-    }
+    public void deleteMeeting(Meeting meeting) { meetings.remove(meeting); }
 
 }

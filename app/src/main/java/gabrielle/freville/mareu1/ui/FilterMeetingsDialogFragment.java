@@ -10,7 +10,6 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 
@@ -22,14 +21,17 @@ import androidx.fragment.app.FragmentManager;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
+import java.util.Objects;
 
 import gabrielle.freville.mareu1.R;
+import gabrielle.freville.mareu1.api.DependencyInjection;
+import gabrielle.freville.mareu1.api.MeetingApiService;
 import gabrielle.freville.mareu1.model.Room;
 
 public class FilterMeetingsDialogFragment extends DialogFragment {
 
     private EditText editTextDate;
-    private Button cancelButton;
+    private Button clearFilterButton;
     private Button validateButton;
     private Spinner roomSpinner;
     public DatePickerDialog datePickerDialog;
@@ -65,7 +67,7 @@ public class FilterMeetingsDialogFragment extends DialogFragment {
         editTextDate = view.findViewById(R.id.filter_meetings_select_date);
         roomSpinner = view.findViewById(R.id.filter_meetings_spinner);
         validateButton = view.findViewById(R.id.filter_meetings_confirm_button);
-        cancelButton = view.findViewById(R.id.filter_meetings_cancel_button);
+        clearFilterButton = view.findViewById(R.id.filter_meetings_cancel_button);
 
         initDatePicker();
         initListeners();
@@ -81,31 +83,21 @@ public class FilterMeetingsDialogFragment extends DialogFragment {
     }
 
     private void initListeners(){
-        cancelButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dismiss();
-            }
+        clearFilterButton.setOnClickListener(v -> {
+            clearFilter();
+            dismiss();
         });
 
-        validateButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                confirmFilter();
-                dismiss();
-            }
+        validateButton.setOnClickListener(v -> {
+            confirmFilter();
+            dismiss();
         });
 
-        editTextDate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                datePickerDialog.show();
-            }
-        });
+        editTextDate.setOnClickListener(v -> datePickerDialog.show());
     }
 
     private void initSpinner(){
-        ArrayAdapter adapter = new ArrayAdapter<Room>(getContext(),
+        ArrayAdapter<Room> adapter = new ArrayAdapter<>(requireContext(),
                 R.layout.support_simple_spinner_dropdown_item,
                 Room.values());
         roomSpinner.setAdapter(adapter);
@@ -114,24 +106,21 @@ public class FilterMeetingsDialogFragment extends DialogFragment {
     @Override
     public void onResume() {
         super.onResume();
-        Window window = getDialog().getWindow();
-        WindowManager.LayoutParams params = window.getAttributes();
+        Window window = Objects.requireNonNull(getDialog()).getWindow();
+        WindowManager.LayoutParams params = Objects.requireNonNull(window).getAttributes();
         params.width = 930;
         params.height = 1150;
         window.setAttributes(params);
     }
 
     public void initDatePicker(){
-        DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                selectedYear = year;
-                selectedMonth = month;
-                selectedDay = dayOfMonth;
-                setStringDate();
-            }
+        DatePickerDialog.OnDateSetListener dateSetListener =  (view, year, month, dayOfMonth) -> {
+            selectedYear = year;
+            selectedMonth = month;
+            selectedDay = dayOfMonth;
+            setStringDate();
         };
-        datePickerDialog = new DatePickerDialog(getContext(), android.R.style.Theme_Material_Dialog,
+        datePickerDialog = new DatePickerDialog(requireContext(), android.R.style.Theme_Material_Dialog,
                 dateSetListener, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
     }
 
@@ -154,6 +143,13 @@ public class FilterMeetingsDialogFragment extends DialogFragment {
         final Room roomFilter = getRoomSpinner();
         final String dateFilter = editTextDate.getEditableText().toString();
         onConfirmFilterListener.confirmFilter(roomFilter, dateFilter);
+    }
+
+    public void clearFilter(){
+        editTextDate = null;
+        roomSpinner = null;
+        MeetingApiService apiService = DependencyInjection.getMeetingsApiService();
+        apiService.getMeetings();
     }
 
     @Override

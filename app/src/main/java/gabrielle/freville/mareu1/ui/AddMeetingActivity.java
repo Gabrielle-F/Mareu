@@ -5,10 +5,8 @@ import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TimePicker;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -90,13 +88,10 @@ public class AddMeetingActivity extends AppCompatActivity {
 
     //** Initialisation du TimePicker et affichage de celui-ci puis récupération de la date */
     public void initTimePicker(){
-        TimePickerDialog.OnTimeSetListener timeSetListener = new TimePickerDialog.OnTimeSetListener() {
-            @Override
-            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                selectedHour = hourOfDay;
-                selectedMinute = minute;
-                setStringTime();
-            }
+        TimePickerDialog.OnTimeSetListener timeSetListener = (view, hourOfDay, minute) -> {
+            selectedHour = hourOfDay;
+            selectedMinute = minute;
+            setStringTime();
         };
         timePickerDialog = new TimePickerDialog(this, android.R.style.Theme_Material_Dialog,
                 timeSetListener, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), true);
@@ -104,14 +99,11 @@ public class AddMeetingActivity extends AppCompatActivity {
 
     //** Initialisation du DatePicker et affichage de celui-ci puis récupération de la date */
     public void initDatePicker(){
-        DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                selectedYear = year;
-                selectedMonth = month;
-                selectedDay = dayOfMonth;
-                setStringDate();
-            }
+        DatePickerDialog.OnDateSetListener dateSetListener = (view, year, month, dayOfMonth) -> {
+            selectedYear = year;
+            selectedMonth = month;
+            selectedDay = dayOfMonth;
+            setStringDate();
         };
         datePickerDialog = new DatePickerDialog(this, android.R.style.Theme_Material_Dialog,
                 dateSetListener, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));

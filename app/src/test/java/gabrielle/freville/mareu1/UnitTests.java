@@ -12,7 +12,7 @@ import gabrielle.freville.mareu1.model.Meeting;
 
 import static org.junit.Assert.*;
 
-public class UnitTest {
+public class UnitTests {
 
     public MeetingApiService service;
     public Meeting meeting;

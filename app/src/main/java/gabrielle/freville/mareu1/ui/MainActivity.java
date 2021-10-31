@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity implements FilterMeetingsDia
         setContentView(R.layout.activity_main);
         apiService = DependencyInjection.getMeetingsApiService();
         recyclerView = findViewById(R.id.activity_main_recyclerview);
-        fabAddMeeting = findViewById(R.id.button_add_meeting);
+        FloatingActionButton fabAddMeeting = findViewById(R.id.button_add_meeting);
         meetingAdapterInterface = this;
         confirmFilterListener = this;
         initList();
@@ -61,10 +61,9 @@ public class MainActivity extends AppCompatActivity implements FilterMeetingsDia
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.filter_action:
-                showFilterMeetingsDialog();
-                confirmFilter(room, date);
+        if (item.getItemId() == R.id.filter_action) {
+            showFilterMeetingsDialog();
+            confirmFilter(room, date);
             return true;
         }
         return super.onOptionsItemSelected(item);

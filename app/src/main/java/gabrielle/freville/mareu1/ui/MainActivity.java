@@ -52,6 +52,7 @@ public class MainActivity extends AppCompatActivity implements FilterMeetingsDia
         });
     }
 
+    //** Menu for filter action */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -59,6 +60,7 @@ public class MainActivity extends AppCompatActivity implements FilterMeetingsDia
         return true;
     }
 
+    //** Actions after clicking on filter action */
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.filter_action) {
@@ -69,7 +71,7 @@ public class MainActivity extends AppCompatActivity implements FilterMeetingsDia
         return super.onOptionsItemSelected(item);
     }
 
-    //** Initialiser la liste des réunions */
+    //** Initializer of meeting list */
     public void initList(){
         meetings = apiService.getMeetings();
         Collections.sort(meetings);
@@ -90,7 +92,7 @@ public class MainActivity extends AppCompatActivity implements FilterMeetingsDia
         updateList(apiService.getMeetings());
     }
 
-    //** Show Pop Up for strain meetings */
+    //** Show Pop Up for filter meetings */
     private void showFilterMeetingsDialog(){
         FragmentManager fragmentManager = getSupportFragmentManager();
         FilterMeetingsDialogFragment filterMeetingsDialogFragment = FilterMeetingsDialogFragment.newInstance(room, date);

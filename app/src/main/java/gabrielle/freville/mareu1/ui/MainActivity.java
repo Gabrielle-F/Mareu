@@ -99,12 +99,34 @@ public class MainActivity extends AppCompatActivity implements FilterMeetingsDia
         filterMeetingsDialogFragment.showNow(fragmentManager, "strain_meeting_dialog");
     }
 
-    //** Get Filter Meetings */
+    //** Filter meetings with room and date arguments */
+    public ArrayList<Meeting> filteringMeetings(ArrayList<Meeting> listToFilter, Room selectedRoom, String selectedDate){
+        ArrayList<Meeting> meetingArrayList = new ArrayList<>();
+        for (Meeting meeting : listToFilter){
+            if (selectedRoom != null && selectedDate != null){
+                if (meeting.getRoom().toString().equals(selectedRoom.toString()) && meeting.getDate().equals(selectedDate)){
+                    meetingArrayList.add(meeting);
+                }
+            }
+            if (selectedRoom != null && selectedDate == null && meeting.getRoom() == selectedRoom){
+                meetingArrayList.add(meeting);
+            }
+            if (selectedRoom == null && selectedDate != null){
+                if (meeting.getDate().equals(selectedDate)){
+                    meetingArrayList.add(meeting);
+                }
+            }
+        }
+        return meetingArrayList;
+    }
+
+    //** Get filtered meetings */
     @Override
     public void confirmFilter(Room pRoom, String pDate) {
         room = pRoom;
         date = pDate;
-        updateList();
+        ArrayList<Meeting> listToFilter = apiService.getMeetings();
+        updateList(filteringMeetings(listToFilter, pRoom, pDate));
     }
 
     //** Delete meeting */

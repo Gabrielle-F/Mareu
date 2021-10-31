@@ -65,7 +65,6 @@ public class MainActivity extends AppCompatActivity implements FilterMeetingsDia
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.filter_action) {
             showFilterMeetingsDialog();
-            confirmFilter(room, date);
             return true;
         }
         return super.onOptionsItemSelected(item);

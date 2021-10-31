@@ -35,8 +35,4 @@ public enum Room implements Serializable {
     public int getColor() {
         return color;
     }
-
-    public void setColor(int color) {
-        this.color = color;
-    }
 }

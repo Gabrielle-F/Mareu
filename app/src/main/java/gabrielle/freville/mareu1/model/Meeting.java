@@ -32,16 +32,12 @@ public class Meeting implements Serializable, Comparable<Meeting> {
     }
 
     public String getDate() { return date; }
-    public void setDate(String date) { this.date=date; }
 
     public String getHour() { return hour; }
-    public void setHour(String hour) { this.hour=hour; }
 
     public Room getRoom() { return room; }
-    public void setRoom(Room room) { this.room=room; }
 
     public String getParticipants() { return participants; }
-    public void setParticipants(String participants) { this.participants=participants; }
 
     @Override
     public int compareTo(Meeting other) {

@@ -78,17 +78,17 @@ public class MainActivity extends AppCompatActivity implements FilterMeetingsDia
         recyclerView.setAdapter(adapter);
     }
 
-    //** Mettre la liste à jour */
-    private void updateList(){
+    //** Update of meeting list */
+    private void updateList(ArrayList<Meeting> newList){
         meetings.clear();
-        meetings.addAll(apiService.getMeetings());
+        meetings.addAll(newList);
         adapter.notifyDataSetChanged();
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        updateList();
+        updateList(apiService.getMeetings());
     }
 
     //** Show Pop Up for strain meetings */

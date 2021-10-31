@@ -53,12 +53,7 @@ public class MeetingAdapter extends RecyclerView.Adapter<MeetingAdapter.ViewHold
                         )
                 )
         );
-        holder.deleteButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                adapterInterface.deleteMeeting(meeting);
-            }
-        });
+        holder.deleteButton.setOnClickListener(v -> adapterInterface.deleteMeeting(meeting));
     }
     
     public interface MeetingAdapterInterface {

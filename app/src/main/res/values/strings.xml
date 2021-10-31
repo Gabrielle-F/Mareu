@@ -23,6 +23,7 @@
     <!--Item-->
     <string name="meeting_sticker">Sticker</string>
     <string name="meeting_title">%1$s - %2$s</string>
+    <string name="delete_meeting">Supprimer</string>
 
     <!--Menu-->
     <string name="strain_meetings_action">StrainMeetings</string>

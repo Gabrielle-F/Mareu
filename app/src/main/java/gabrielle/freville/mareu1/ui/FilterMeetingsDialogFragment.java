@@ -82,7 +82,7 @@ public class FilterMeetingsDialogFragment extends DialogFragment {
 
     private void initListeners(){
         clearFilterButton.setOnClickListener(v -> {
-            clearFilter();
+            onConfirmFilterListener.clearFilter();
             dismiss();
         });
 
@@ -135,6 +135,7 @@ public class FilterMeetingsDialogFragment extends DialogFragment {
 
     public interface ConfirmFilterListener{
         void confirmFilter(Room room, String date);
+        void clearFilter();
     }
 
     public void confirmFilter(){

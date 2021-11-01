@@ -14,11 +14,12 @@
     <string name="cancel">Annuler</string>
 
     <!--Strain Meetings-->
-    <string name="strain_meetings">Filtrer</string>
-    <string name="strain_meetings_date">Prévues le:</string>
-    <string name="strain_meetings_room">Salle:</string>
-    <string name="confirm_strain_button">Confirmer</string>
-    <string name="cancel_strain_button">Effacer</string>
+    <string name="filter_meetings">Filtrer</string>
+    <string name="filter_meetings_date">Date</string>
+    <string name="filter_meetings_with_room">Filtrer par salle</string>
+    <string name="filter_meetings_with_date">Filtrer par date</string>
+    <string name="confirm_filter_button">Confirmer</string>
+    <string name="cancel_filter_button">Effacer</string>
 
     <!--Item-->
     <string name="meeting_sticker">Sticker</string>

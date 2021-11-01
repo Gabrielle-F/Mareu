@@ -24,8 +24,6 @@ import java.util.Locale;
 import java.util.Objects;
 
 import gabrielle.freville.mareu1.R;
-import gabrielle.freville.mareu1.api.DependencyInjection;
-import gabrielle.freville.mareu1.api.MeetingApiService;
 import gabrielle.freville.mareu1.model.Room;
 
 public class FilterMeetingsDialogFragment extends DialogFragment {

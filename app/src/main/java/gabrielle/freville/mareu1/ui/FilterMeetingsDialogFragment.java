@@ -138,16 +138,15 @@ public class FilterMeetingsDialogFragment extends DialogFragment {
     }
 
     public void confirmFilter(){
-        final Room roomFilter = getRoomSpinner();
-        final String dateFilter = editTextDate.getEditableText().toString();
+        Room roomFilter = getRoomSpinner();
+        if(roomFilter.toString().isEmpty()){
+            roomFilter = null;
+        }
+        String dateFilter = editTextDate.getEditableText().toString();
+        if(dateFilter.isEmpty()){
+            dateFilter = null;
+        }
         onConfirmFilterListener.confirmFilter(roomFilter, dateFilter);
-    }
-
-    public void clearFilter(){
-        editTextDate = null;
-        roomSpinner = null;
-        MeetingApiService apiService = DependencyInjection.getMeetingsApiService();
-        apiService.getMeetings();
     }
 
     @Override

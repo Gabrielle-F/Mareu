@@ -128,6 +128,13 @@ public class MainActivity extends AppCompatActivity implements FilterMeetingsDia
         updateList(filteringMeetings(listToFilter, pRoom, pDate));
     }
 
+    @Override
+    public void clearFilter() {
+        room = null;
+        date = null;
+        updateList(apiService.getMeetings());
+    }
+
     //** Delete meeting */
     @Override
     public void deleteMeeting(Meeting meeting) {

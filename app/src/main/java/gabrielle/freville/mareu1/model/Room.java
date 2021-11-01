@@ -8,6 +8,7 @@ import java.io.Serializable;
 import gabrielle.freville.mareu1.R;
 
 public enum Room implements Serializable {
+    NONE(0, ""),
     MARIO(R.color.brightred, "Mario"),
     TOAD(R.color.lightred, "Toad"),
     BOWSER(R.color.lightorange, "Bowser"),

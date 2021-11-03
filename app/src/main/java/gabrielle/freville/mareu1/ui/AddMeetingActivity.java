@@ -61,7 +61,7 @@ public class AddMeetingActivity extends AppCompatActivity {
         initListeners();
     }
 
-    private void initListeners(){
+    private void initListeners() {
         create.setOnClickListener(v -> {
             confirmCreationOfMeeting();
             finish();
@@ -75,19 +75,19 @@ public class AddMeetingActivity extends AppCompatActivity {
     }
 
     //** Initialisation du Spinner pour le choix de la salle */
-    public void initSpinner(){
-        ArrayAdapter <Room> adapter = new ArrayAdapter<>(this,
+    public void initSpinner() {
+        ArrayAdapter<Room> adapter = new ArrayAdapter<>(this,
                 R.layout.support_simple_spinner_dropdown_item,
                 Room.values());
         roomSpinner.setAdapter(adapter);
     }
 
-    public Room getRoom(){
+    public Room getRoom() {
         return (Room) roomSpinner.getSelectedItem();
     }
 
     //** Initialisation du TimePicker et affichage de celui-ci puis récupération de la date */
-    public void initTimePicker(){
+    public void initTimePicker() {
         TimePickerDialog.OnTimeSetListener timeSetListener = (view, hourOfDay, minute) -> {
             selectedHour = hourOfDay;
             selectedMinute = minute;
@@ -98,7 +98,7 @@ public class AddMeetingActivity extends AppCompatActivity {
     }
 
     //** Initialisation du DatePicker et affichage de celui-ci puis récupération de la date */
-    public void initDatePicker(){
+    public void initDatePicker() {
         DatePickerDialog.OnDateSetListener dateSetListener = (view, year, month, dayOfMonth) -> {
             selectedYear = year;
             selectedMonth = month;
@@ -110,7 +110,7 @@ public class AddMeetingActivity extends AppCompatActivity {
     }
 
     //** Attribuer la date au EditText et la convertir en texte */
-    public void setStringDate(){
+    public void setStringDate() {
         calendar.set(selectedYear, selectedMonth, selectedDay);
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy", Locale.FRANCE);
         String date = formatter.format(calendar.getTime());
@@ -118,14 +118,14 @@ public class AddMeetingActivity extends AppCompatActivity {
     }
 
     //** Attribuer l'heure à l'EditText et la convertir en texte */
-    public void setStringTime(){
+    public void setStringTime() {
         calendar.set(selectedHour, selectedMinute);
         SimpleDateFormat formatter = new SimpleDateFormat("HH:mm", Locale.FRANCE);
         String time = formatter.format(calendar.getTime());
         editTextTime.setText(time);
     }
 
-    private void confirmCreationOfMeeting(){
+    private void confirmCreationOfMeeting() {
         Meeting meeting = new Meeting(
                 editTextDate.getEditableText().toString(),
                 editTextTime.getEditableText().toString(),

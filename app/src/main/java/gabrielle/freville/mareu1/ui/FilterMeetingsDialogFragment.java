@@ -52,7 +52,7 @@ public class FilterMeetingsDialogFragment extends DialogFragment {
         return fragment;
     }
 
-    public void readBundle(){
+    public void readBundle() {
         bundle = getArguments();
     }
 
@@ -77,10 +77,10 @@ public class FilterMeetingsDialogFragment extends DialogFragment {
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        onConfirmFilterListener = (ConfirmFilterListener)context;
+        onConfirmFilterListener = (ConfirmFilterListener) context;
     }
 
-    private void initListeners(){
+    private void initListeners() {
         clearFilterButton.setOnClickListener(v -> {
             onConfirmFilterListener.clearFilter();
             dismiss();
@@ -94,7 +94,7 @@ public class FilterMeetingsDialogFragment extends DialogFragment {
         editTextDate.setOnClickListener(v -> datePickerDialog.show());
     }
 
-    private void initSpinner(){
+    private void initSpinner() {
         ArrayAdapter<Room> adapter = new ArrayAdapter<>(requireContext(),
                 R.layout.support_simple_spinner_dropdown_item,
                 Room.values());
@@ -111,8 +111,8 @@ public class FilterMeetingsDialogFragment extends DialogFragment {
         window.setAttributes(params);
     }
 
-    public void initDatePicker(){
-        DatePickerDialog.OnDateSetListener dateSetListener =  (view, year, month, dayOfMonth) -> {
+    public void initDatePicker() {
+        DatePickerDialog.OnDateSetListener dateSetListener = (view, year, month, dayOfMonth) -> {
             selectedYear = year;
             selectedMonth = month;
             selectedDay = dayOfMonth;
@@ -122,29 +122,30 @@ public class FilterMeetingsDialogFragment extends DialogFragment {
                 dateSetListener, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
     }
 
-    public void setStringDate(){
+    public void setStringDate() {
         calendar.set(selectedYear, selectedMonth, selectedDay);
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy", Locale.FRANCE);
         String date = formatter.format(calendar.getTime());
         editTextDate.setText(date);
     }
 
-    public Room getRoomSpinner(){
+    public Room getRoomSpinner() {
         return (Room) roomSpinner.getSelectedItem();
     }
 
-    public interface ConfirmFilterListener{
+    public interface ConfirmFilterListener {
         void confirmFilter(Room room, String date);
+
         void clearFilter();
     }
 
-    public void confirmFilter(){
+    public void confirmFilter() {
         Room roomFilter = getRoomSpinner();
-        if(roomFilter.toString().isEmpty()){
+        if (roomFilter.toString().isEmpty()) {
             roomFilter = null;
         }
         String dateFilter = editTextDate.getEditableText().toString();
-        if(dateFilter.isEmpty()){
+        if (dateFilter.isEmpty()) {
             dateFilter = null;
         }
         onConfirmFilterListener.confirmFilter(roomFilter, dateFilter);

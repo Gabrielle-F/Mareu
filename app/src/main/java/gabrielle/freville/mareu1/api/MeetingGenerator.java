@@ -22,5 +22,7 @@ public class MeetingGenerator {
 
     );
 
-    static List<Meeting> getMeetings() { return new ArrayList<>(DUMMY_MEETINGS); }
+    static List<Meeting> getMeetings() {
+        return new ArrayList<>(DUMMY_MEETINGS);
+    }
 }

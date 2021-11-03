@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity implements FilterMeetingsDia
     }
 
     //** Initializer of meeting list */
-    public void initList(){
+    public void initList() {
         meetings = apiService.getMeetings();
         Collections.sort(meetings);
         adapter = new MeetingAdapter(meetings, this);
@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity implements FilterMeetingsDia
     }
 
     //** Update of meeting list */
-    private void updateList(ArrayList<Meeting> newList){
+    private void updateList(ArrayList<Meeting> newList) {
         meetings.clear();
         meetings.addAll(newList);
         adapter.notifyDataSetChanged();
@@ -92,26 +92,26 @@ public class MainActivity extends AppCompatActivity implements FilterMeetingsDia
     }
 
     //** Show Pop Up for filter meetings */
-    private void showFilterMeetingsDialog(){
+    private void showFilterMeetingsDialog() {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FilterMeetingsDialogFragment filterMeetingsDialogFragment = FilterMeetingsDialogFragment.newInstance(room, date);
         filterMeetingsDialogFragment.showNow(fragmentManager, "strain_meeting_dialog");
     }
 
     //** Filter meetings with room and date arguments */
-    public ArrayList<Meeting> filteringMeetings(ArrayList<Meeting> listToFilter, Room selectedRoom, String selectedDate){
+    public ArrayList<Meeting> filteringMeetings(ArrayList<Meeting> listToFilter, Room selectedRoom, String selectedDate) {
         ArrayList<Meeting> meetingArrayList = new ArrayList<>();
-        for (Meeting meeting : listToFilter){
-            if (selectedRoom != null && selectedDate != null){
-                if (meeting.getRoom().toString().equals(selectedRoom.toString()) && meeting.getDate().equals(selectedDate)){
+        for (Meeting meeting : listToFilter) {
+            if (selectedRoom != null && selectedDate != null) {
+                if (meeting.getRoom().toString().equals(selectedRoom.toString()) && meeting.getDate().equals(selectedDate)) {
                     meetingArrayList.add(meeting);
                 }
             }
-            if (selectedRoom != null && selectedDate == null && meeting.getRoom() == selectedRoom){
+            if (selectedRoom != null && selectedDate == null && meeting.getRoom() == selectedRoom) {
                 meetingArrayList.add(meeting);
             }
-            if (selectedRoom == null && selectedDate != null){
-                if (meeting.getDate().equals(selectedDate)){
+            if (selectedRoom == null && selectedDate != null) {
+                if (meeting.getDate().equals(selectedDate)) {
                     meetingArrayList.add(meeting);
                 }
             }

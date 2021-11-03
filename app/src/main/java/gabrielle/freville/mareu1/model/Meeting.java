@@ -14,13 +14,13 @@ public class Meeting implements Serializable, Comparable<Meeting> {
     private String participants;
 
     public Meeting(String date, String hour, Room room, String participants) {
-        this.date=date;
-        this.hour=hour;
-        this.room=room;
-        this.participants=participants;
+        this.date = date;
+        this.hour = hour;
+        this.room = room;
+        this.participants = participants;
     }
 
-    public Date getFormattedDate(){
+    public Date getFormattedDate() {
         String dateString = date + " " + hour;
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yy HH'h'mm", Locale.FRANCE);
         try {
@@ -31,13 +31,21 @@ public class Meeting implements Serializable, Comparable<Meeting> {
         }
     }
 
-    public String getDate() { return date; }
+    public String getDate() {
+        return date;
+    }
 
-    public String getHour() { return hour; }
+    public String getHour() {
+        return hour;
+    }
 
-    public Room getRoom() { return room; }
+    public Room getRoom() {
+        return room;
+    }
 
-    public String getParticipants() { return participants; }
+    public String getParticipants() {
+        return participants;
+    }
 
     @Override
     public int compareTo(Meeting other) {

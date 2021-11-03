@@ -4,5 +4,7 @@ public class DependencyInjection {
 
     private static MeetingApiService apiService = new MeetingApiService();
 
-    public static MeetingApiService getMeetingsApiService() { return apiService; }
+    public static MeetingApiService getMeetingsApiService() {
+        return apiService;
+    }
 }

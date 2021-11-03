@@ -23,9 +23,10 @@ public class MeetingAdapter extends RecyclerView.Adapter<MeetingAdapter.ViewHold
     private final List<Meeting> meetings;
     public MeetingAdapterInterface adapterInterface;
 
-    public MeetingAdapter(List<Meeting> items, MeetingAdapterInterface meetingAdapterInterface){
+    public MeetingAdapter(List<Meeting> items, MeetingAdapterInterface meetingAdapterInterface) {
         meetings = items;
-        adapterInterface = meetingAdapterInterface; }
+        adapterInterface = meetingAdapterInterface;
+    }
 
     @NonNull
     @Override
@@ -55,7 +56,7 @@ public class MeetingAdapter extends RecyclerView.Adapter<MeetingAdapter.ViewHold
         );
         holder.deleteButton.setOnClickListener(v -> adapterInterface.deleteMeeting(meeting));
     }
-    
+
     public interface MeetingAdapterInterface {
         void deleteMeeting(Meeting meeting);
     }

@@ -76,7 +76,6 @@ public class AddMeetingActivity extends AppCompatActivity {
         editTextTime.setOnClickListener(v -> timePickerDialog.show());
     }
 
-    //** Initialisation du Spinner pour le choix de la salle */
     public void initSpinner() {
         ArrayAdapter<Room> adapter = new ArrayAdapter<>(this,
                 R.layout.support_simple_spinner_dropdown_item,
@@ -88,7 +87,6 @@ public class AddMeetingActivity extends AppCompatActivity {
         return (Room) roomSpinner.getSelectedItem();
     }
 
-    //** Initialisation du TimePicker et affichage de celui-ci puis récupération de la date */
     public void initTimePicker() {
         TimePickerDialog.OnTimeSetListener timeSetListener = (view, hourOfDay, minute) -> {
             selectedHour = hourOfDay;
@@ -99,7 +97,6 @@ public class AddMeetingActivity extends AppCompatActivity {
                 timeSetListener, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), true);
     }
 
-    //** Initialisation du DatePicker et affichage de celui-ci puis récupération de la date */
     public void initDatePicker() {
         DatePickerDialog.OnDateSetListener dateSetListener = (view, year, month, dayOfMonth) -> {
             selectedYear = year;
@@ -111,7 +108,6 @@ public class AddMeetingActivity extends AppCompatActivity {
                 dateSetListener, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
     }
 
-    //** Attribuer la date au EditText et la convertir en texte */
     public void setStringDate() {
         calendar.set(selectedYear, selectedMonth, selectedDay);
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy", Locale.FRANCE);
@@ -119,7 +115,6 @@ public class AddMeetingActivity extends AppCompatActivity {
         editTextDate.setText(date);
     }
 
-    //** Attribuer l'heure à l'EditText et la convertir en texte */
     public void setStringTime() {
         calendar.set(selectedHour, selectedMinute);
         SimpleDateFormat formatter = new SimpleDateFormat("HH:mm", Locale.FRANCE);

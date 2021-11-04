@@ -52,7 +52,6 @@ public class MainActivity extends AppCompatActivity implements FilterMeetingsDia
         });
     }
 
-    //** Menu for filter action */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -60,7 +59,6 @@ public class MainActivity extends AppCompatActivity implements FilterMeetingsDia
         return true;
     }
 
-    //** Actions after clicking on filter action */
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.filter_action) {
@@ -70,7 +68,6 @@ public class MainActivity extends AppCompatActivity implements FilterMeetingsDia
         return super.onOptionsItemSelected(item);
     }
 
-    //** Initializer of meeting list */
     public void initList() {
         meetings = apiService.getMeetings();
         Collections.sort(meetings);
@@ -78,7 +75,6 @@ public class MainActivity extends AppCompatActivity implements FilterMeetingsDia
         recyclerView.setAdapter(adapter);
     }
 
-    //** Update of meeting list */
     private void updateList(ArrayList<Meeting> newList) {
         meetings.clear();
         meetings.addAll(newList);
@@ -91,14 +87,12 @@ public class MainActivity extends AppCompatActivity implements FilterMeetingsDia
         updateList(apiService.getMeetings());
     }
 
-    //** Show Pop Up for filter meetings */
     private void showFilterMeetingsDialog() {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FilterMeetingsDialogFragment filterMeetingsDialogFragment = FilterMeetingsDialogFragment.newInstance(room, date);
         filterMeetingsDialogFragment.showNow(fragmentManager, "strain_meeting_dialog");
     }
 
-    //** Filter meetings with room and date arguments */
     public ArrayList<Meeting> filteringMeetings(ArrayList<Meeting> listToFilter, Room selectedRoom, String selectedDate) {
         ArrayList<Meeting> meetingArrayList = new ArrayList<>();
         for (Meeting meeting : listToFilter) {
@@ -119,7 +113,6 @@ public class MainActivity extends AppCompatActivity implements FilterMeetingsDia
         return meetingArrayList;
     }
 
-    //** Get filtered meetings */
     @Override
     public void confirmFilter(Room pRoom, String pDate) {
         room = pRoom;
@@ -134,8 +127,7 @@ public class MainActivity extends AppCompatActivity implements FilterMeetingsDia
         date = null;
         updateList(apiService.getMeetings());
     }
-
-    //** Delete meeting */
+    
     @Override
     public void deleteMeeting(Meeting meeting) {
         meetingToDelete = meeting;

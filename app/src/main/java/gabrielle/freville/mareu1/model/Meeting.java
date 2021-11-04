@@ -8,12 +8,14 @@ import java.util.Locale;
 
 public class Meeting implements Serializable, Comparable<Meeting> {
 
+    private String subject;
     private String hour;
     private String date;
     private Room room;
     private String participants;
 
-    public Meeting(String date, String hour, Room room, String participants) {
+    public Meeting(String subject, String date, String hour, Room room, String participants) {
+        this.subject = subject;
         this.date = date;
         this.hour = hour;
         this.room = room;
@@ -29,6 +31,10 @@ public class Meeting implements Serializable, Comparable<Meeting> {
             e.printStackTrace();
             return new Date();
         }
+    }
+
+    public String getSubject() {
+        return subject;
     }
 
     public String getDate() {

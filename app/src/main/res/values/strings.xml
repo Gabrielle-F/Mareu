@@ -6,6 +6,7 @@
 
     <!--Add Meeting Activity-->
     <string name="add_meeting_title">Programmer une réunion</string>
+    <string name="select_subject">Renseignez le sujet de la réunion</string>
     <string name="select_room">Sélectionnez une salle:</string>
     <string name="select_date">Sélectionnez une date:</string>
     <string name="select_hour">Sélectionnez une heure:</string>

@@ -40,8 +40,9 @@ public class MeetingAdapter extends RecyclerView.Adapter<MeetingAdapter.ViewHold
     public void onBindViewHolder(final ViewHolder holder, int position) {
         Meeting meeting = meetings.get(position);
 
-        holder.meetingHourAndRoom.setText(holder.itemView.getContext().getString
-                (R.string.meeting_title,
+        holder.meetingSubjectHourRoom.setText(holder.itemView.getContext().getString
+                (R.string.meeting_information,
+                        meeting.getSubject(),
                         meeting.getHour(),
                         meeting.getRoom()));
         holder.meetingParticipants.setText(meeting.getParticipants());
@@ -68,7 +69,7 @@ public class MeetingAdapter extends RecyclerView.Adapter<MeetingAdapter.ViewHold
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         ImageView meetingSticker;
-        TextView meetingHourAndRoom;
+        TextView meetingSubjectHourRoom;
         TextView meetingParticipants;
         ImageButton deleteButton;
 
@@ -76,7 +77,7 @@ public class MeetingAdapter extends RecyclerView.Adapter<MeetingAdapter.ViewHold
 
             super(itemView);
             meetingSticker = itemView.findViewById(R.id.meeting_sticker);
-            meetingHourAndRoom = itemView.findViewById(R.id.meeting_hour_room);
+            meetingSubjectHourRoom = itemView.findViewById(R.id.meeting_subject_hour_room);
             meetingParticipants = itemView.findViewById(R.id.meeting_participants);
             deleteButton = itemView.findViewById(R.id.meeting_delete_button);
         }

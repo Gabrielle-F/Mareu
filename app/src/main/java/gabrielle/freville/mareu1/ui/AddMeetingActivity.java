@@ -23,6 +23,7 @@ import gabrielle.freville.mareu1.model.Room;
 
 public class AddMeetingActivity extends AppCompatActivity {
 
+    public EditText editTextSubject;
     public EditText editTextDate;
     public EditText editTextTime;
     public Spinner roomSpinner;
@@ -49,6 +50,7 @@ public class AddMeetingActivity extends AppCompatActivity {
         apiService = DependencyInjection.getMeetingsApiService();
 
         roomSpinner = findViewById(R.id.spinner_room_add_meeting);
+        editTextSubject = findViewById(R.id.select_subject);
         editTextDate = findViewById(R.id.select_date);
         editTextTime = findViewById(R.id.select_hour);
         participants = findViewById(R.id.select_participants);
@@ -127,6 +129,7 @@ public class AddMeetingActivity extends AppCompatActivity {
 
     private void confirmCreationOfMeeting() {
         Meeting meeting = new Meeting(
+                editTextSubject.getEditableText().toString(),
                 editTextDate.getEditableText().toString(),
                 editTextTime.getEditableText().toString(),
                 getRoom(),

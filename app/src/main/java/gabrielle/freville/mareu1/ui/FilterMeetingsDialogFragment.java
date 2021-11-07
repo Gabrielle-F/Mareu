@@ -42,13 +42,13 @@ public class FilterMeetingsDialogFragment extends DialogFragment {
     public Bundle bundle;
     final Calendar calendar = Calendar.getInstance();
 
-    public static FilterMeetingsDialogFragment newInstance(Room pRoom, String pDate) {
-        Bundle mBundle = new Bundle();
-        mBundle.putSerializable("Room", pRoom);
-        mBundle.putString("Date", pDate);
+    public static FilterMeetingsDialogFragment newInstance(Room room, String date) {
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("Room", room);
+        bundle.putString("Date", date);
 
         FilterMeetingsDialogFragment fragment = new FilterMeetingsDialogFragment();
-        fragment.setArguments(mBundle);
+        fragment.setArguments(bundle);
         return fragment;
     }
 

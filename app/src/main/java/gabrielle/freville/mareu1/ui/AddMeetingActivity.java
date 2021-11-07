@@ -94,7 +94,8 @@ public class AddMeetingActivity extends AppCompatActivity {
             setStringTime();
         };
         timePickerDialog = new TimePickerDialog(this, android.R.style.Theme_Material_Dialog,
-                timeSetListener, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), true);
+                timeSetListener, calendar.get(Calendar.HOUR_OF_DAY),
+                calendar.get(Calendar.MINUTE), true);
     }
 
     public void initDatePicker() {
@@ -116,7 +117,8 @@ public class AddMeetingActivity extends AppCompatActivity {
     }
 
     public void setStringTime() {
-        calendar.set(selectedHour, selectedMinute);
+        calendar.set(Calendar.HOUR_OF_DAY, selectedHour);
+        calendar.set(Calendar.MINUTE, selectedMinute);
         SimpleDateFormat formatter = new SimpleDateFormat("HH:mm", Locale.FRANCE);
         String time = formatter.format(calendar.getTime());
         editTextTime.setText(time);

@@ -1,16 +1,13 @@
 package gabrielle.freville.mareu1.MeetingListTests;
 
 import android.content.Context;
-import android.view.View;
 
-import androidx.test.core.app.ActivityScenario;
 import androidx.test.espresso.action.ViewActions;
-import androidx.test.espresso.contrib.ViewPagerActions;
 import androidx.test.espresso.matcher.ViewMatchers;
 import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
-import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.espresso.contrib.RecyclerViewActions;
+import androidx.test.rule.ActivityTestRule;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -28,9 +25,10 @@ import static gabrielle.freville.mareu1.utils.RecyclerViewItemCountAssertion.wit
 import gabrielle.freville.mareu1.R;
 import gabrielle.freville.mareu1.api.DependencyInjection;
 import gabrielle.freville.mareu1.api.MeetingApiService;
+import gabrielle.freville.mareu1.model.Meeting;
+import gabrielle.freville.mareu1.model.Room;
 import gabrielle.freville.mareu1.ui.MainActivity;
 import gabrielle.freville.mareu1.utils.DeleteViewAction;
-import gabrielle.freville.mareu1.utils.SwipeUpAction;
 
 import static org.junit.Assert.*;
 
@@ -42,17 +40,24 @@ import static org.junit.Assert.*;
 @RunWith(AndroidJUnit4.class)
 public class MeetingListTests {
 
+    public MainActivity mainActivity;
     private static int ITEM_COUNT = 9;
     public MeetingApiService apiService;
+    public Meeting meeting;
+    public Room selectedRoom;
+    public String selectedDate;
 
     @Rule
-    public ActivityScenarioRule scenarioRule = new ActivityScenarioRule(MainActivity.class);
+    public ActivityTestRule<MainActivity> activityTestRule = new ActivityTestRule<>(MainActivity.class);
 
     @Before
     public void setup(){
-        ActivityScenario rule = scenarioRule.getScenario();
-        assertNotNull(rule);
-        apiService = DependencyInjection.getMeetingsApiService();
+        mainActivity = activityTestRule.getActivity();
+        assertNotNull(mainActivity);
+        apiService = DependencyInjection.getMeetingApiService();
+        selectedRoom = Room.YOSHI;
+        selectedDate = "25/06/2021";
+        meeting = new Meeting("RéunionTest", "25/06/2021", "13h00", Room.YOSHI, "viviane@lamzone.com, maxime@lamzone.com");
     }
 
     @Test
@@ -93,5 +98,24 @@ public class MeetingListTests {
     public void clickOnFilterAction_shouldShowDialogFragment(){
         onView(withId(R.id.filter_action)).perform(click());
         onView(withId(R.id.dialog_fragment)).check(matches(isDisplayed()));
+    }
+
+    @Test
+    public void meetingList_addMeeting_shouldAddAnItem(){
+        onView(withId(R.id.activity_main_recyclerview)).check(withItemCount(ITEM_COUNT));
+        onView(withId(R.id.button_add_meeting)).perform(click());
+        onView(withId(R.id.add_meeting_layout)).check(matches(isDisplayed()));
+        onView(withId(R.id.button_validate)).perform(click());
+        onView(withId(R.id.activity_main_recyclerview)).check(withItemCount(ITEM_COUNT + 1));
+    }
+
+    @Test
+    public void meetingList_filterMeetings_shouldOnlyShowMeetingsWithSelectedDateAndRoom(){
+        onView(withId(R.id.filter_action)).perform(click());
+        onView(withId(R.id.dialog_fragment)).check(matches(isDisplayed()));
+        onView(withId(R.id.filter_meetings_confirm_button)).perform(click());
+        onView(withId(R.id.activity_main_recyclerview)).check(matches(isDisplayed()));
+        assertSame(meeting.getRoom(), selectedRoom);
+        assertSame(meeting.getDate(), selectedDate);
     }
 }

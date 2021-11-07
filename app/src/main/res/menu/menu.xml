@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/filter_action"
-        android:title="@string/strain_meetings_action"
+        android:title="@string/filter_meetings_action"
         android:icon="@drawable/ic_baseline_filter_list"
         app:showAsAction="ifRoom" />
 </menu>

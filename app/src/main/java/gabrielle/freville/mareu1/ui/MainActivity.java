@@ -90,7 +90,7 @@ public class MainActivity extends AppCompatActivity implements FilterMeetingsDia
     private void showFilterMeetingsDialog() {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FilterMeetingsDialogFragment filterMeetingsDialogFragment = FilterMeetingsDialogFragment.newInstance(room, date);
-        filterMeetingsDialogFragment.showNow(fragmentManager, "strain_meeting_dialog");
+        filterMeetingsDialogFragment.showNow(fragmentManager, "filter_meeting_dialog");
     }
 
     public ArrayList<Meeting> filteringMeetings(ArrayList<Meeting> listToFilter, Room selectedRoom, String selectedDate) {
@@ -114,11 +114,11 @@ public class MainActivity extends AppCompatActivity implements FilterMeetingsDia
     }
 
     @Override
-    public void confirmFilter(Room pRoom, String pDate) {
-        room = pRoom;
-        date = pDate;
+    public void confirmFilter(Room selectedRoom, String selectedDate) {
+        room = selectedRoom;
+        date = selectedDate;
         ArrayList<Meeting> listToFilter = apiService.getMeetings();
-        updateList(filteringMeetings(listToFilter, pRoom, pDate));
+        updateList(filteringMeetings(listToFilter, selectedRoom, selectedDate));
     }
 
     @Override
@@ -127,7 +127,7 @@ public class MainActivity extends AppCompatActivity implements FilterMeetingsDia
         date = null;
         updateList(apiService.getMeetings());
     }
-    
+
     @Override
     public void deleteMeeting(Meeting meeting) {
         meetingToDelete = meeting;

@@ -47,7 +47,7 @@ public class AddMeetingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_meeting);
 
-        apiService = DependencyInjection.getMeetingsApiService();
+        apiService = DependencyInjection.getMeetingApiService();
 
         roomSpinner = findViewById(R.id.spinner_room_add_meeting);
         editTextSubject = findViewById(R.id.select_subject);

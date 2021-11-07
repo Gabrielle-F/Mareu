@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity implements FilterMeetingsDia
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        apiService = DependencyInjection.getMeetingsApiService();
+        apiService = DependencyInjection.getMeetingApiService();
         recyclerView = findViewById(R.id.activity_main_recyclerview);
         FloatingActionButton fabAddMeeting = findViewById(R.id.button_add_meeting);
         meetingAdapterInterface = this;

@@ -88,6 +88,7 @@
                 android:hint="@string/select_participants"
                 android:layout_marginTop="10dp"
                 android:padding="20dp"
+                android:textAlignment="center"
                 android:autofillHints="participants"
                 android:inputType="text|textEmailAddress"/>
 

@@ -93,7 +93,7 @@ public class MainActivity extends AppCompatActivity implements FilterMeetingsDia
         filterMeetingsDialogFragment.showNow(fragmentManager, "filter_meeting_dialog");
     }
 
-    public ArrayList<Meeting> filteringMeetings(ArrayList<Meeting> listToFilter, Room selectedRoom, String selectedDate) {
+    public static ArrayList<Meeting> filteringMeetings(ArrayList<Meeting> listToFilter, Room selectedRoom, String selectedDate) {
         ArrayList<Meeting> meetingArrayList = new ArrayList<>();
         for (Meeting meeting : listToFilter) {
             if (selectedRoom != null && selectedDate != null) {

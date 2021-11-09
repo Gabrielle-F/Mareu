@@ -15,6 +15,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 import gabrielle.freville.mareu1.R;
 import gabrielle.freville.mareu1.api.DependencyInjection;
@@ -93,7 +94,7 @@ public class MainActivity extends AppCompatActivity implements FilterMeetingsDia
         filterMeetingsDialogFragment.showNow(fragmentManager, "filter_meeting_dialog");
     }
 
-    public static ArrayList<Meeting> filteringMeetings(ArrayList<Meeting> listToFilter, Room selectedRoom, String selectedDate) {
+    public static ArrayList<Meeting> filteringMeetings(List<Meeting> listToFilter, Room selectedRoom, String selectedDate) {
         ArrayList<Meeting> meetingArrayList = new ArrayList<>();
         for (Meeting meeting : listToFilter) {
             if (selectedRoom != null && selectedDate != null) {

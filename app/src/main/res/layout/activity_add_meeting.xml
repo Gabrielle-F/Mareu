@@ -127,14 +127,4 @@
 
     </ScrollView>
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/add_meeting_toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/colorPrimary"
-        android:padding="20sp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:title="@string/add_meeting_title"
-        app:titleTextColor="#FFFFFF" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

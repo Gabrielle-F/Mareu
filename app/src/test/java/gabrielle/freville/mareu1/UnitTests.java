@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import gabrielle.freville.mareu1.api.DependencyInjection;
@@ -17,9 +18,6 @@ import static org.junit.Assert.*;
 
 public class UnitTests {
 
-    public MainActivity mainActivity;
-    public Room room = Room.YOSHI ;
-    public String date = "10/10/2021";
     public MeetingApiService service;
     public Meeting meeting;
 
@@ -51,12 +49,21 @@ public class UnitTests {
 
     @Test
     public void filterMeetingsWithSuccess(){
-        ArrayList<Meeting> listToFilter = service.getMeetings();
-        ArrayList<Meeting> filteredMeetingList = new ArrayList<>();
-        mainActivity.filteringMeetings(listToFilter, room, date);
-        Meeting meetingToAdd = meeting;
-        assertSame(meetingToAdd.getRoom(), room);
-        assertEquals(meetingToAdd.getDate(), date);
-        assertTrue(filteredMeetingList.contains(meetingToAdd));
+        Meeting meetingA = new Meeting("Réunion A", "25/06/2021", "13h00",
+                Room.YOSHI, "viviane@lamzone.com, maxime@lamzone.com");
+        List<Meeting> listToFilter = Arrays.asList(
+                new Meeting("Réunion A", "25/06/2021", "13h00",
+                        Room.YOSHI, "viviane@lamzone.com, maxime@lamzone.com"),
+                new Meeting("Réunion B", "26/06/2021", "14h00",
+                        Room.BOWSER, "viviane@lamzone.com, maxime@lamzone.com, paul@lamzone.com"),
+                new Meeting("Réunion C", "30/06/2021", "09h00",
+                        Room.DAISY, "luc@lamzone.com, paul@lamzone.com"),
+                new Meeting("Réunion D", "09/07/2021", "15h00",
+                        Room.MARIO, "alex@lamzone.com, viviane@lamzone.com, luc@lamzone.com")
+        );
+        MainActivity.filteringMeetings(listToFilter, meetingA.getRoom(), meetingA.getDate());
+        ArrayList<Meeting> filteredList = new ArrayList<>();
+        filteredList.add(meetingA);
+        assertTrue(filteredList.contains(meetingA));
     }
 }

@@ -14,7 +14,7 @@
     <string name="validate">Confirmer</string>
     <string name="cancel">Annuler</string>
 
-    <!--Strain Meetings-->
+    <!--Filter Meetings-->
     <string name="filter_meetings">Filtrer</string>
     <string name="filter_meetings_date">Date</string>
     <string name="filter_meetings_with_room">Filtrer par salle</string>

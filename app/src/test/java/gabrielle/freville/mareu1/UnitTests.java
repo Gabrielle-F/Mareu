@@ -22,33 +22,33 @@ public class UnitTests {
     public Meeting meeting;
 
     @Before
-    public void setup(){
+    public void setup() {
         service = DependencyInjection.getMeetingApiService();
     }
 
     @Test
-    public void addMeetingWithSuccess(){
+    public void addMeetingWithSuccess() {
         Meeting meetingToAdd = meeting;
         service.createMeeting(meetingToAdd);
         assertTrue(service.getMeetings().contains(meetingToAdd));
     }
 
     @Test
-    public void deleteMeetingWithSuccess(){
+    public void deleteMeetingWithSuccess() {
         Meeting meetingToDelete = service.getMeetings().get(1);
         service.deleteMeeting(meetingToDelete);
         assertFalse(service.getMeetings().contains(meetingToDelete));
     }
 
     @Test
-    public void getMeetingsWithSuccess(){
+    public void getMeetingsWithSuccess() {
         List<Meeting> meetings = service.getMeetings();
         List<Meeting> expectedMeetings = MeetingGenerator.DUMMY_MEETINGS;
         assertEquals(meetings, expectedMeetings);
     }
 
     @Test
-    public void filterMeetingsWithSuccess(){
+    public void filterMeetingsWithSuccess() {
         Meeting meetingA = new Meeting("Réunion A", "25/06/2021", "13h00",
                 Room.YOSHI, "viviane@lamzone.com, maxime@lamzone.com");
         List<Meeting> listToFilter = Arrays.asList(

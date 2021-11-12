@@ -51,7 +51,7 @@ public class MeetingListTests {
     public ActivityTestRule<MainActivity> activityTestRule = new ActivityTestRule<>(MainActivity.class);
 
     @Before
-    public void setup(){
+    public void setup() {
         mainActivity = activityTestRule.getActivity();
         assertNotNull(mainActivity);
         apiService = DependencyInjection.getMeetingApiService();
@@ -68,13 +68,13 @@ public class MeetingListTests {
     }
 
     @Test
-    public void meetingList_shouldNotBeEmpty(){
+    public void meetingList_shouldNotBeEmpty() {
         onView(ViewMatchers.withId(R.id.activity_main_recyclerview))
                 .check(matches(hasMinimumChildCount(1)));
     }
 
     @Test
-    public void meetingList_deleteAction_shouldRemoveAnItem(){
+    public void meetingList_deleteAction_shouldRemoveAnItem() {
         onView(ViewMatchers.withId(R.id.activity_main_recyclerview)).check(withItemCount(ITEM_COUNT));
         onView(ViewMatchers.withId(R.id.activity_main_recyclerview))
                 .perform(RecyclerViewActions.actionOnItemAtPosition(1, new DeleteViewAction()));
@@ -83,25 +83,25 @@ public class MeetingListTests {
     }
 
     @Test
-    public void meetingList_swipeUp(){
+    public void meetingList_swipeUp() {
         onView(ViewMatchers.withId(R.id.activity_main_recyclerview)).check(withItemCount(ITEM_COUNT));
         onView(ViewMatchers.withId(R.id.activity_main_recyclerview)).perform(ViewActions.swipeUp());
     }
 
     @Test
-    public void clickOnAddMeetingButton_shouldShowAddMeetingActivity(){
+    public void clickOnAddMeetingButton_shouldShowAddMeetingActivity() {
         onView(withId(R.id.button_add_meeting)).perform(click());
         onView(withId(R.id.add_meeting_layout)).check(matches(isDisplayed()));
     }
 
     @Test
-    public void clickOnFilterAction_shouldShowDialogFragment(){
+    public void clickOnFilterAction_shouldShowDialogFragment() {
         onView(withId(R.id.filter_action)).perform(click());
         onView(withId(R.id.dialog_fragment)).check(matches(isDisplayed()));
     }
 
     @Test
-    public void meetingList_addMeeting_shouldAddAnItem(){
+    public void meetingList_addMeeting_shouldAddAnItem() {
         onView(withId(R.id.activity_main_recyclerview)).check(withItemCount(ITEM_COUNT));
         onView(withId(R.id.button_add_meeting)).perform(click());
         onView(withId(R.id.add_meeting_layout)).check(matches(isDisplayed()));
@@ -110,7 +110,7 @@ public class MeetingListTests {
     }
 
     @Test
-    public void meetingList_filterMeetings_shouldOnlyShowMeetingsWithSelectedDateAndRoom(){
+    public void meetingList_filterMeetings_shouldOnlyShowMeetingsWithSelectedDateAndRoom() {
         onView(withId(R.id.filter_action)).perform(click());
         onView(withId(R.id.dialog_fragment)).check(matches(isDisplayed()));
         onView(withId(R.id.filter_meetings_confirm_button)).perform(click());

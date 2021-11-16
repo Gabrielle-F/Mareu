@@ -7,6 +7,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -40,6 +41,7 @@ public class AddMeetingActivity extends AppCompatActivity {
     private MeetingApiService apiService;
     public DatePickerDialog datePickerDialog;
     public TimePickerDialog timePickerDialog;
+    public boolean isFieldEmpty;
     final Calendar calendar = Calendar.getInstance();
 
     @Override
@@ -65,7 +67,7 @@ public class AddMeetingActivity extends AppCompatActivity {
 
     private void initListeners() {
         create.setOnClickListener(v -> {
-            confirmCreationOfMeeting();
+            createMeetingIfAllValuesAreSelected();
             finish();
         });
 
@@ -122,6 +124,37 @@ public class AddMeetingActivity extends AppCompatActivity {
         SimpleDateFormat formatter = new SimpleDateFormat("HH:mm", Locale.FRANCE);
         String time = formatter.format(calendar.getTime());
         editTextTime.setText(time);
+    }
+
+    public void verifyValues() {
+            if (editTextSubject.toString().isEmpty()) {
+                isFieldEmpty = true;
+                Toast.makeText(this, "Renseignez le sujet de la réunion", Toast.LENGTH_SHORT).show();
+            }
+            else if (editTextDate.toString().isEmpty()) {
+                isFieldEmpty = true;
+                Toast.makeText(this, "Choisissez une date", Toast.LENGTH_SHORT).show();
+            }
+            else if (editTextTime.toString().isEmpty()) {
+                isFieldEmpty = true;
+                Toast.makeText(this, "Choisissez une heure", Toast.LENGTH_SHORT).show();
+            }
+            else if (getRoom() == null) {
+                isFieldEmpty = true;
+                Toast.makeText(this, "Choisissez une salle", Toast.LENGTH_SHORT).show();
+            }
+            else if (participants.toString().isEmpty()) {
+                isFieldEmpty = true;
+                Toast.makeText(this, "Indiquez les participants", Toast.LENGTH_SHORT).show();
+            }
+    }
+
+    //** Add after viva **/
+    public void createMeetingIfAllValuesAreSelected() {
+        while (isFieldEmpty) {
+            verifyValues();
+        }
+        confirmCreationOfMeeting();
     }
 
     private void confirmCreationOfMeeting() {

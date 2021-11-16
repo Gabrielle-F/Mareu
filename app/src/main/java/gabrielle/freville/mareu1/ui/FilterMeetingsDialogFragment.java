@@ -24,6 +24,8 @@ import java.util.Locale;
 import java.util.Objects;
 
 import gabrielle.freville.mareu1.R;
+import gabrielle.freville.mareu1.api.DependencyInjection;
+import gabrielle.freville.mareu1.api.MeetingApiService;
 import gabrielle.freville.mareu1.model.Room;
 
 public class FilterMeetingsDialogFragment extends DialogFragment {
@@ -33,12 +35,12 @@ public class FilterMeetingsDialogFragment extends DialogFragment {
     private Button validateButton;
     private Spinner roomSpinner;
     public DatePickerDialog datePickerDialog;
+    public MeetingApiService apiService;
 
     public int selectedYear;
     public int selectedMonth;
     public int selectedDay;
 
-    public ConfirmFilterListener onConfirmFilterListener;
     public Bundle bundle;
     final Calendar calendar = Calendar.getInstance();
 
@@ -62,6 +64,7 @@ public class FilterMeetingsDialogFragment extends DialogFragment {
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.dialog_fragment_filter, container);
+        apiService = DependencyInjection.getMeetingApiService();
         editTextDate = view.findViewById(R.id.filter_meetings_select_date);
         roomSpinner = view.findViewById(R.id.filter_meetings_spinner);
         validateButton = view.findViewById(R.id.filter_meetings_confirm_button);
@@ -77,17 +80,16 @@ public class FilterMeetingsDialogFragment extends DialogFragment {
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        onConfirmFilterListener = (ConfirmFilterListener) context;
     }
 
     private void initListeners() {
         clearFilterButton.setOnClickListener(v -> {
-            onConfirmFilterListener.clearFilter();
+            apiService.clearFilter(getRoomSpinner(), getSelectedDate());
             dismiss();
         });
 
         validateButton.setOnClickListener(v -> {
-            confirmFilter();
+            apiService.confirmFilter(getRoomSpinner(), getSelectedDate());
             dismiss();
         });
 
@@ -129,26 +131,12 @@ public class FilterMeetingsDialogFragment extends DialogFragment {
         editTextDate.setText(date);
     }
 
+    //** Add after viva **/
+    public String getSelectedDate() {
+        return editTextDate.getEditableText().toString(); }
+
     public Room getRoomSpinner() {
         return (Room) roomSpinner.getSelectedItem();
-    }
-
-    public interface ConfirmFilterListener {
-        void confirmFilter(Room room, String date);
-
-        void clearFilter();
-    }
-
-    public void confirmFilter() {
-        Room roomFilter = getRoomSpinner();
-        if (roomFilter.toString().isEmpty()) {
-            roomFilter = null;
-        }
-        String dateFilter = editTextDate.getEditableText().toString();
-        if (dateFilter.isEmpty()) {
-            dateFilter = null;
-        }
-        onConfirmFilterListener.confirmFilter(roomFilter, dateFilter);
     }
 
     @Override
@@ -156,4 +144,6 @@ public class FilterMeetingsDialogFragment extends DialogFragment {
         readBundle();
         super.showNow(manager, tag);
     }
+
+
 }

@@ -23,7 +23,7 @@ import gabrielle.freville.mareu1.api.MeetingApiService;
 import gabrielle.freville.mareu1.model.Meeting;
 import gabrielle.freville.mareu1.model.Room;
 
-public class MainActivity extends AppCompatActivity implements FilterMeetingsDialogFragment.ConfirmFilterListener, MeetingAdapter.MeetingAdapterInterface {
+public class MainActivity extends AppCompatActivity implements MeetingAdapter.MeetingAdapterInterface {
 
     private MeetingApiService apiService;
     private String date;
@@ -34,7 +34,6 @@ public class MainActivity extends AppCompatActivity implements FilterMeetingsDia
     public MeetingAdapter adapter;
     public Meeting meetingToDelete;
     public MeetingAdapter.MeetingAdapterInterface meetingAdapterInterface;
-    public FilterMeetingsDialogFragment.ConfirmFilterListener confirmFilterListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +43,6 @@ public class MainActivity extends AppCompatActivity implements FilterMeetingsDia
         recyclerView = findViewById(R.id.activity_main_recyclerview);
         FloatingActionButton fabAddMeeting = findViewById(R.id.button_add_meeting);
         meetingAdapterInterface = this;
-        confirmFilterListener = this;
         initList();
 
         fabAddMeeting.setOnClickListener(v -> {
@@ -94,39 +92,19 @@ public class MainActivity extends AppCompatActivity implements FilterMeetingsDia
         filterMeetingsDialogFragment.showNow(fragmentManager, "filter_meeting_dialog");
     }
 
-    public static ArrayList<Meeting> filteringMeetings(List<Meeting> listToFilter, Room selectedRoom, String selectedDate) {
-        ArrayList<Meeting> meetingArrayList = new ArrayList<>();
-        for (Meeting meeting : listToFilter) {
-            if (selectedRoom != null && selectedDate != null) {
-                if (meeting.getRoom().toString().equals(selectedRoom.toString()) && meeting.getDate().equals(selectedDate)) {
-                    meetingArrayList.add(meeting);
-                }
-            }
-            if (selectedRoom != null && selectedDate == null && meeting.getRoom() == selectedRoom) {
-                meetingArrayList.add(meeting);
-            }
-            if (selectedRoom == null && selectedDate != null) {
-                if (meeting.getDate().equals(selectedDate)) {
-                    meetingArrayList.add(meeting);
-                }
-            }
-        }
-        return meetingArrayList;
-    }
-
-    @Override
-    public void confirmFilter(Room selectedRoom, String selectedDate) {
+    //** Add after viva **/
+    public void getFilter(Room selectedRoom, String selectedDate) {
         room = selectedRoom;
         date = selectedDate;
-        ArrayList<Meeting> listToFilter = apiService.getMeetings();
-        updateList(filteringMeetings(listToFilter, selectedRoom, selectedDate));
+        apiService.confirmFilter(room, date);
     }
 
-    @Override
-    public void clearFilter() {
-        room = null;
-        date = null;
-        updateList(apiService.getMeetings());
+    //** Add after viva **/
+    public void filteringMeetingList(List<Meeting> listToFilter) {
+        Room selectedRoom = room;
+        String selectedDate = date;
+        getFilter(selectedRoom, selectedDate);
+        apiService.filteringMeetings(listToFilter, selectedRoom, selectedDate);
     }
 
     @Override

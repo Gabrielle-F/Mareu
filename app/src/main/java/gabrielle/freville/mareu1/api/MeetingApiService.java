@@ -62,6 +62,7 @@ public class MeetingApiService implements ApiService {
         if (selectedDate.isEmpty()) {
             selectedDate = null;
         }
+        filterMeetings(selectedRoom, selectedDate);
     }
 
     //** Add after viva **/

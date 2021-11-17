@@ -67,7 +67,6 @@ public class AddMeetingActivity extends AppCompatActivity {
     private void initListeners() {
         create.setOnClickListener(v -> {
             createMeetingIfAllValuesAreSelected();
-            finish();
         });
 
         cancel.setOnClickListener(v -> AddMeetingActivity.this.finish());
@@ -127,19 +126,19 @@ public class AddMeetingActivity extends AppCompatActivity {
 
     public Boolean isAllFieldCompleted() {
         boolean isOk = true;
-        if (editTextSubject.toString().isEmpty()) {
+        if (editTextSubject.getText().toString().isEmpty()) {
             isOk = false;
             Toast.makeText(this, "Renseignez le sujet de la réunion", Toast.LENGTH_SHORT).show();
-        } else if (editTextDate.toString().isEmpty()) {
+        } else if (editTextDate.getText().toString().isEmpty()) {
             isOk = false;
             Toast.makeText(this, "Choisissez une date", Toast.LENGTH_SHORT).show();
-        } else if (editTextTime.toString().isEmpty()) {
+        } else if (editTextTime.getText().toString().isEmpty()) {
             isOk = false;
             Toast.makeText(this, "Choisissez une heure", Toast.LENGTH_SHORT).show();
-        } else if (getRoom() == null) {
+        } else if (getRoom() == Room.NONE) {
             isOk = false;
             Toast.makeText(this, "Choisissez une salle", Toast.LENGTH_SHORT).show();
-        } else if (participants.toString().isEmpty()) {
+        } else if (participants.getText().toString().isEmpty()) {
             isOk = false;
             Toast.makeText(this, "Indiquez les participants", Toast.LENGTH_SHORT).show();
         }
@@ -149,6 +148,7 @@ public class AddMeetingActivity extends AppCompatActivity {
     public void createMeetingIfAllValuesAreSelected() {
         if (isAllFieldCompleted()) {
             confirmCreationOfMeeting();
+            finish();
         }
     }
 

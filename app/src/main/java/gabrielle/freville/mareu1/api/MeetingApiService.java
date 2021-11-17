@@ -21,8 +21,10 @@ public class MeetingApiService implements ApiService {
     }
 
     @Override
-    public ArrayList<Meeting> getCurrentMeetingsList() {
-        return new ArrayList<>(allMeetings);
+    public List<Meeting> getCurrentMeetingsList() {
+        if (filteredMeetings != null) {
+            return filteredMeetings;
+        } else return allMeetings;
     }
 
     @Override

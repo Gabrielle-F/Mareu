@@ -65,22 +65,26 @@ public class MeetingApiService implements ApiService {
         if (selectedDate.isEmpty()) {
             selectedDate = null;
         }
+        room = selectedRoom;
+        date = selectedDate;
         filterMeetings(selectedRoom, selectedDate);
     }
 
     @Override
     public Room getCurrentRoomFilter() {
-        return null;
+        return room;
     }
 
     @Override
     public String getCurrentDateFilter() {
-        return null;
+        return date;
     }
 
     //** Add after viva **/
     @Override
     public void clearFilter() {
+        room = null;
+        date = null;
         filteredMeetings = null;
     }
 

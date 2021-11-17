@@ -26,8 +26,6 @@ import gabrielle.freville.mareu1.model.Room;
 public class MainActivity extends AppCompatActivity implements MeetingAdapter.MeetingAdapterInterface {
 
     private MeetingApiService apiService;
-    private String date;
-    private Room room;
     private ArrayList<Meeting> meetings;
 
     public RecyclerView recyclerView;
@@ -88,7 +86,7 @@ public class MainActivity extends AppCompatActivity implements MeetingAdapter.Me
 
     private void showFilterMeetingsDialog() {
         FragmentManager fragmentManager = getSupportFragmentManager();
-        FilterMeetingsDialogFragment filterMeetingsDialogFragment = FilterMeetingsDialogFragment.newInstance(room, date);
+        FilterMeetingsDialogFragment filterMeetingsDialogFragment = new FilterMeetingsDialogFragment();
         filterMeetingsDialogFragment.showNow(fragmentManager, "filter_meeting_dialog");
     }
 

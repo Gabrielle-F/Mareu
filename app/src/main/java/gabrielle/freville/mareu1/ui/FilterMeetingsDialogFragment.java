@@ -44,16 +44,6 @@ public class FilterMeetingsDialogFragment extends DialogFragment {
     public Bundle bundle;
     final Calendar calendar = Calendar.getInstance();
 
-    public static FilterMeetingsDialogFragment newInstance(Room room, String date) {
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("Room", room);
-        bundle.putString("Date", date);
-
-        FilterMeetingsDialogFragment fragment = new FilterMeetingsDialogFragment();
-        fragment.setArguments(bundle);
-        return fragment;
-    }
-
     public void readBundle() {
         bundle = getArguments();
     }

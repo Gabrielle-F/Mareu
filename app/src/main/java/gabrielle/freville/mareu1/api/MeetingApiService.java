@@ -35,7 +35,6 @@ public class MeetingApiService implements ApiService {
         allMeetings.remove(meeting);
     }
 
-    //** Add after viva **/
     public void filterMeetings(Room selectedRoom, String selectedDate) {
         ArrayList<Meeting> meetingArrayList = new ArrayList<>();
         for (Meeting meeting : allMeetings) {
@@ -56,7 +55,6 @@ public class MeetingApiService implements ApiService {
         filteredMeetings = meetingArrayList;
     }
 
-    //** Add after viva **/
     @Override
     public void confirmFilter(Room selectedRoom, String selectedDate) {
         if (selectedRoom.toString().isEmpty()) {
@@ -80,7 +78,6 @@ public class MeetingApiService implements ApiService {
         return date;
     }
 
-    //** Add after viva **/
     @Override
     public void clearFilter() {
         room = null;

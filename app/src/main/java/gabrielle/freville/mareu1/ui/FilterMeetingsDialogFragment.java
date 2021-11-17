@@ -129,9 +129,9 @@ public class FilterMeetingsDialogFragment extends DialogFragment {
         editTextDate.setText(date);
     }
 
-    //** Add after viva **/
     public String getSelectedDate() {
-        return editTextDate.getEditableText().toString(); }
+        return editTextDate.getEditableText().toString();
+    }
 
     public Room getRoomSpinner() {
         return (Room) roomSpinner.getSelectedItem();

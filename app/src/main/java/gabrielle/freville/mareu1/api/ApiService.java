@@ -1,6 +1,5 @@
 package gabrielle.freville.mareu1.api;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import gabrielle.freville.mareu1.model.Meeting;
@@ -14,16 +13,12 @@ public interface ApiService {
 
     void deleteMeeting(Meeting meeting);
 
-    //** Add after viva **/
     void confirmFilter(Room selectedRoom, String selectedDate);
 
-    //** Add after viva **/
     Room getCurrentRoomFilter();
 
-    //** Add after viva **/
     String getCurrentDateFilter();
 
-    //** Add after viva **/
     void clearFilter();
 
 }

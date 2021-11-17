@@ -33,10 +33,9 @@ public class MeetingApiService implements ApiService {
     }
 
     //** Add after viva **/
-    @Override
-    public ArrayList<Meeting> filteringMeetings(List<Meeting> listToFilter, Room selectedRoom, String selectedDate) {
+    public ArrayList<Meeting> filterMeetings(Room selectedRoom, String selectedDate) {
         ArrayList<Meeting> meetingArrayList = new ArrayList<>();
-        for (Meeting meeting : listToFilter) {
+        for (Meeting meeting : allMeetings) {
             if (selectedRoom != null && selectedDate != null) {
                 if (meeting.getRoom().toString().equals(selectedRoom.toString()) && meeting.getDate().equals(selectedDate)) {
                     meetingArrayList.add(meeting);

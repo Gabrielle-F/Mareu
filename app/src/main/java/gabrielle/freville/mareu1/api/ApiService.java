@@ -15,9 +15,6 @@ public interface ApiService {
     void deleteMeeting(Meeting meeting);
 
     //** Add after viva **/
-    ArrayList<Meeting> filteringMeetings(List<Meeting> listToFilter, Room selectedRoom, String selectedDate);
-
-    //** Add after viva **/
     void confirmFilter(Room selectedRoom, String selectedDate);
 
     //** Add after viva **/

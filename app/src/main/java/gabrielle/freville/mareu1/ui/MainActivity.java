@@ -15,15 +15,13 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 
 import gabrielle.freville.mareu1.R;
 import gabrielle.freville.mareu1.api.DependencyInjection;
 import gabrielle.freville.mareu1.api.MeetingApiService;
 import gabrielle.freville.mareu1.model.Meeting;
-import gabrielle.freville.mareu1.model.Room;
 
-public class MainActivity extends AppCompatActivity implements MeetingAdapter.MeetingAdapterInterface {
+public class MainActivity extends AppCompatActivity implements MeetingAdapter.MeetingAdapterInterface, FilterMeetingsDialogFragment.ConfirmFilterListener {
 
     private MeetingApiService apiService;
     private ArrayList<Meeting> meetings;
@@ -96,5 +94,10 @@ public class MainActivity extends AppCompatActivity implements MeetingAdapter.Me
         apiService.deleteMeeting(meetingToDelete);
         meetings.remove(meeting);
         adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void confirmFilter() {
+        updateList();
     }
 }

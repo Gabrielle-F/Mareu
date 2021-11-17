@@ -43,9 +43,14 @@ public class FilterMeetingsDialogFragment extends DialogFragment {
 
     public Bundle bundle;
     final Calendar calendar = Calendar.getInstance();
+    private ConfirmFilterListener onConfirmFilterListener;
 
     public void readBundle() {
         bundle = getArguments();
+    }
+
+    public interface ConfirmFilterListener {
+        void confirmFilter();
     }
 
     @Nullable
@@ -70,16 +75,19 @@ public class FilterMeetingsDialogFragment extends DialogFragment {
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
+        onConfirmFilterListener = (ConfirmFilterListener) context;
     }
 
     private void initListeners() {
         clearFilterButton.setOnClickListener(v -> {
             apiService.clearFilter();
+            onConfirmFilterListener.confirmFilter();
             dismiss();
         });
 
         validateButton.setOnClickListener(v -> {
             apiService.confirmFilter(getRoomSpinner(), getSelectedDate());
+            onConfirmFilterListener.confirmFilter();
             dismiss();
         });
 

@@ -84,7 +84,7 @@ public class FilterMeetingsDialogFragment extends DialogFragment {
 
     private void initListeners() {
         clearFilterButton.setOnClickListener(v -> {
-            apiService.clearFilter(getRoomSpinner(), getSelectedDate());
+            apiService.clearFilter();
             dismiss();
         });
 

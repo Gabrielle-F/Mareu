@@ -67,9 +67,8 @@ public class MeetingApiService implements ApiService {
 
     //** Add after viva **/
     @Override
-    public void clearFilter(Room room, String date) {
-        room = null;
-        date = null;
+    public void clearFilter() {
+        filteredMeetings = null;
     }
 
 }

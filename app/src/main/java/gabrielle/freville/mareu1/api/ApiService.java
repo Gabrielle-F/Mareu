@@ -18,6 +18,6 @@ public interface ApiService {
     void confirmFilter(Room selectedRoom, String selectedDate);
 
     //** Add after viva **/
-    void clearFilter(Room room, String date);
+    void clearFilter();
 
 }

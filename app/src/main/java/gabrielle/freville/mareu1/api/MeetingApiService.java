@@ -8,25 +8,26 @@ import gabrielle.freville.mareu1.model.Room;
 
 public class MeetingApiService implements ApiService {
 
-    private List<Meeting> meetings;
+    private List<Meeting> allMeetings;
+    private List<Meeting> filteredMeetings;
 
     public MeetingApiService() {
-        meetings = new ArrayList<>(MeetingGenerator.getMeetings());
+        allMeetings = MeetingGenerator.getMeetings();
     }
 
     @Override
     public void createMeeting(Meeting meeting) {
-        meetings.add(meeting);
+        allMeetings.add(meeting);
     }
 
     @Override
     public ArrayList<Meeting> getCurrentMeetingsList() {
-        return new ArrayList<>(meetings);
+        return new ArrayList<>(allMeetings);
     }
 
     @Override
     public void deleteMeeting(Meeting meeting) {
-        meetings.remove(meeting);
+        allMeetings.remove(meeting);
     }
 
     //** Add after viva **/

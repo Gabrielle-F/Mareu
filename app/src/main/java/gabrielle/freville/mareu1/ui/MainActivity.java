@@ -92,21 +92,6 @@ public class MainActivity extends AppCompatActivity implements MeetingAdapter.Me
         filterMeetingsDialogFragment.showNow(fragmentManager, "filter_meeting_dialog");
     }
 
-    //** Add after viva **/
-    public void getFilter(Room selectedRoom, String selectedDate) {
-        room = selectedRoom;
-        date = selectedDate;
-        apiService.confirmFilter(room, date);
-    }
-
-    //** Add after viva **/
-    public void filteringMeetingList(List<Meeting> listToFilter) {
-        Room selectedRoom = room;
-        String selectedDate = date;
-        getFilter(selectedRoom, selectedDate);
-        apiService.filteringMeetings(listToFilter, selectedRoom, selectedDate);
-    }
-
     @Override
     public void deleteMeeting(Meeting meeting) {
         meetingToDelete = meeting;

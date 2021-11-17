@@ -11,6 +11,9 @@ public class MeetingApiService implements ApiService {
     private List<Meeting> allMeetings;
     private List<Meeting> filteredMeetings;
 
+    private Room room;
+    private String date;
+
     public MeetingApiService() {
         allMeetings = MeetingGenerator.getMeetings();
     }
@@ -63,6 +66,16 @@ public class MeetingApiService implements ApiService {
             selectedDate = null;
         }
         filterMeetings(selectedRoom, selectedDate);
+    }
+
+    @Override
+    public Room getCurrentRoomFilter() {
+        return null;
+    }
+
+    @Override
+    public String getCurrentDateFilter() {
+        return null;
     }
 
     //** Add after viva **/

@@ -33,7 +33,7 @@ public class MeetingApiService implements ApiService {
     }
 
     //** Add after viva **/
-    public ArrayList<Meeting> filterMeetings(Room selectedRoom, String selectedDate) {
+    public void filterMeetings(Room selectedRoom, String selectedDate) {
         ArrayList<Meeting> meetingArrayList = new ArrayList<>();
         for (Meeting meeting : allMeetings) {
             if (selectedRoom != null && selectedDate != null) {
@@ -50,7 +50,7 @@ public class MeetingApiService implements ApiService {
                 }
             }
         }
-        return meetingArrayList;
+        filteredMeetings = meetingArrayList;
     }
 
     //** Add after viva **/

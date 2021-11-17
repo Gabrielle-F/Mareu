@@ -41,7 +41,6 @@ public class AddMeetingActivity extends AppCompatActivity {
     private MeetingApiService apiService;
     public DatePickerDialog datePickerDialog;
     public TimePickerDialog timePickerDialog;
-    public boolean isFieldEmpty;
     final Calendar calendar = Calendar.getInstance();
 
     @Override
@@ -126,35 +125,36 @@ public class AddMeetingActivity extends AppCompatActivity {
         editTextTime.setText(time);
     }
 
-    public void verifyValues() {
+    public Boolean isAllFieldCompleted() {
+        boolean isOk = true;
             if (editTextSubject.toString().isEmpty()) {
-                isFieldEmpty = true;
+                isOk = false;
                 Toast.makeText(this, "Renseignez le sujet de la réunion", Toast.LENGTH_SHORT).show();
             }
             else if (editTextDate.toString().isEmpty()) {
-                isFieldEmpty = true;
+                isOk = false;
                 Toast.makeText(this, "Choisissez une date", Toast.LENGTH_SHORT).show();
             }
             else if (editTextTime.toString().isEmpty()) {
-                isFieldEmpty = true;
+                isOk = false;
                 Toast.makeText(this, "Choisissez une heure", Toast.LENGTH_SHORT).show();
             }
             else if (getRoom() == null) {
-                isFieldEmpty = true;
+                isOk = false;
                 Toast.makeText(this, "Choisissez une salle", Toast.LENGTH_SHORT).show();
             }
             else if (participants.toString().isEmpty()) {
-                isFieldEmpty = true;
+                isOk = false;
                 Toast.makeText(this, "Indiquez les participants", Toast.LENGTH_SHORT).show();
             }
+            return isOk;
     }
 
     //** Add after viva **/
     public void createMeetingIfAllValuesAreSelected() {
-        while (isFieldEmpty) {
-            verifyValues();
+        if (isAllFieldCompleted()) {
+            confirmCreationOfMeeting();
         }
-        confirmCreationOfMeeting();
     }
 
     private void confirmCreationOfMeeting() {

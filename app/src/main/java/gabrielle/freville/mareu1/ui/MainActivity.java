@@ -66,22 +66,22 @@ public class MainActivity extends AppCompatActivity implements MeetingAdapter.Me
     }
 
     public void initList() {
-        meetings = apiService.getCurrentMeetingsList();
+        meetings = new ArrayList<>(apiService.getCurrentMeetingsList());
         Collections.sort(meetings);
         adapter = new MeetingAdapter(meetings, this);
         recyclerView.setAdapter(adapter);
     }
 
-    private void updateList(ArrayList<Meeting> newList) {
+    private void updateList() {
         meetings.clear();
-        meetings.addAll(newList);
+        meetings.addAll(apiService.getCurrentMeetingsList());
         adapter.notifyDataSetChanged();
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        updateList(apiService.getCurrentMeetingsList());
+        updateList();
     }
 
     private void showFilterMeetingsDialog() {

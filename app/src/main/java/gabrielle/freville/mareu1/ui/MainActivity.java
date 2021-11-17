@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity implements MeetingAdapter.Me
     }
 
     public void initList() {
-        meetings = apiService.getMeetings();
+        meetings = apiService.getCurrentMeetingsList();
         Collections.sort(meetings);
         adapter = new MeetingAdapter(meetings, this);
         recyclerView.setAdapter(adapter);
@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity implements MeetingAdapter.Me
     @Override
     protected void onStart() {
         super.onStart();
-        updateList(apiService.getMeetings());
+        updateList(apiService.getCurrentMeetingsList());
     }
 
     private void showFilterMeetingsDialog() {

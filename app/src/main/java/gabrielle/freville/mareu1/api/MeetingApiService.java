@@ -5,16 +5,13 @@ import java.util.List;
 
 import gabrielle.freville.mareu1.model.Meeting;
 import gabrielle.freville.mareu1.model.Room;
-import gabrielle.freville.mareu1.ui.FilterMeetingsDialogFragment;
 
 public class MeetingApiService implements ApiService {
 
     private List<Meeting> meetings;
-    private FilterMeetingsDialogFragment dialogFragment;
 
     public MeetingApiService() {
         meetings = new ArrayList<>(MeetingGenerator.getMeetings());
-        dialogFragment = new FilterMeetingsDialogFragment();
     }
 
     @Override
@@ -23,7 +20,7 @@ public class MeetingApiService implements ApiService {
     }
 
     @Override
-    public ArrayList<Meeting> getMeetings() {
+    public ArrayList<Meeting> getCurrentMeetingsList() {
         return new ArrayList<>(meetings);
     }
 
@@ -57,11 +54,9 @@ public class MeetingApiService implements ApiService {
     //** Add after viva **/
     @Override
     public void confirmFilter(Room selectedRoom, String selectedDate) {
-        selectedRoom = dialogFragment.getRoomSpinner();
         if (selectedRoom.toString().isEmpty()) {
             selectedRoom = null;
         }
-        selectedDate = dialogFragment.getSelectedDate();
         if (selectedDate.isEmpty()) {
             selectedDate = null;
         }
@@ -70,8 +65,6 @@ public class MeetingApiService implements ApiService {
     //** Add after viva **/
     @Override
     public void clearFilter(Room room, String date) {
-        room = dialogFragment.getRoomSpinner();
-        date = dialogFragment.getSelectedDate();
         room = null;
         date = null;
     }

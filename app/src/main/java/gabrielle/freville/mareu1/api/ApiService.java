@@ -10,7 +10,7 @@ public interface ApiService {
 
     void createMeeting(Meeting meeting);
 
-    ArrayList<Meeting> getMeetings();
+    List<Meeting> getCurrentMeetingsList();
 
     void deleteMeeting(Meeting meeting);
 
@@ -20,7 +20,7 @@ public interface ApiService {
     //** Add after viva **/
     void confirmFilter(Room selectedRoom, String selectedDate);
 
-    //** Add after viva */
+    //** Add after viva **/
     void clearFilter(Room room, String date);
 
 }

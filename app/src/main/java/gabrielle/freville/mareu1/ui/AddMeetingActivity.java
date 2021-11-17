@@ -65,9 +65,7 @@ public class AddMeetingActivity extends AppCompatActivity {
     }
 
     private void initListeners() {
-        create.setOnClickListener(v -> {
-            createMeetingIfAllValuesAreSelected();
-        });
+        create.setOnClickListener(v -> createMeetingIfAllValuesAreSelected());
 
         cancel.setOnClickListener(v -> AddMeetingActivity.this.finish());
 
